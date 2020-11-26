@@ -19,39 +19,22 @@ passport.deserializeUser((userId, callback) => {
 
 //Rome's code:
 passport.use(new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'username',
     passwordField: 'password'
-}, (email, password, cb) => {
+}, (username, password, callback) => {
     db.user.findOne({
-            where: { email }
+            where: { username }
         })
         .then(user => {
             if (!user || !user.validPassword(password)) {
-                // Why null inside cb
-                cb(null, false);
+                callback(null, false);
             } else {
-                cb(null, user);
+                callback(null, user);
             }
         })
-        .catch(cb);
+        .catch(callback);
 }));
 
-/* Mine:
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-}, (email, password, callback) => {
-    db.user.findOne({
-        where: { email }
-    }).then(user => {
-        if (!user || !user.validPassword(password)) {
-            callback(null, false);
-        } else {
-            callback(null, user);
-        }
-    }).catch(callback)
-}));
-*/
 
 
 module.exports = passport;

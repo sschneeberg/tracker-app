@@ -13,23 +13,26 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            models.user.hasMany(models.period);
+            models.user.hasMany(models.activity);
+            models.user.belongsToMany(models.med, { through: 'usersMeds' });
         }
     };
     user.init({
         name: {
             type: DataTypes.STRING,
-            validate: {
-                len: { args: [1, 99], msg: 'Name must be between 1 and 99 characters' }
-            }
+            allowNull: false
         },
-        email: {
+        username: {
             type: DataTypes.STRING,
+            allowNull: false,
             validate: {
-                isEmail: { msg: 'Invalid Email' }
+                len: { args: [1, 99], msg: 'Username must be at least 4 characters' }
             }
         },
         password: {
             type: DataTypes.STRING,
+            allowNull: false,
             validate: {
                 len: { args: [8, 99], msg: 'Password must be at least 8 characters' },
             }
