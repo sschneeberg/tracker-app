@@ -48,12 +48,12 @@ app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile');
 });
 
-app.use('/auth', require('./routes/auth'));
+app.use('/auth', require('./controllers/auth'));
 
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
-    console.log(`🎧 You're listening to the smooth sounds of port ${PORT} 🎧`);
+    console.log(`Connected on ${port}`);
 });
 
 module.exports = server;
