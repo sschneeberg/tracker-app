@@ -1,1 +1,57 @@
-<h2>Homepage</h2>
+<main>
+    <h2>Welcome to Tracker</h2>
+</main>
+
+
+<div id="signup" class="modal">
+    <div class="modal-header">
+        <h5 class="modal-title" id="signupLabel">Signup
+            <span class="modal-close">&times;</span> </h5>
+    </div>
+    <form action="/auth/signup" method='POST'>
+
+        <div class="modal-content">
+            <div class="input-field">
+                <label for="new-username">Username</label>
+                <input id="new-username" type="text" name="username" required>
+            </div>
+            <div class="input-field">
+                <label for="new-name">Name</label>
+                <input id="new-name" type="text" name="name" required>
+            </div>
+            <div class="input-field">
+                <label for="new-password">Password</label>
+                <input id="new-password" type="password" name="password" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary">ENTER</button>
+        </div>
+
+    </form>
+</div>
+
+
+<div class="modal" id="login">
+    <div class="modal-header">
+        <h5 class="modal-title" id="loginLabel">Login
+            <span class="modal-close">&times;</span> </h5>
+    </div>
+    <form action="/auth/login" method='POST'>
+
+        <div class="modal-content">
+            <div class="input-field">
+                <label for="auth-username">Username</label>
+                <input id="auth-username" type="text" name="username" required>
+            </div>
+            <div class="input-field">
+                <label for="auth-password">Password</label>
+                <input id="auth-password" type="password" name="password" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary">ENTER</button>
+        </div>
+
+    </form>
+</div>

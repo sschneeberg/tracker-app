@@ -1,9 +1,26 @@
-nav ul li {
-  text-decoration: none;
-  display: inline-block;
-  margin-right: .3em;
+main {
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 95vh;
+    width: 100vw;
 }
 
-h1 {
-  color: chartreuse;
+nav {
+    background-color: rgba(154, 230, 211, 0.76);
+    padding: 5px 5px 5px 20px;
+}
+
+nav li a,
+nav a.brand-logo {
+    color: rgb(84, 96, 109)
+}
+
+.modal {
+    padding: 20px;
+}
+
+span.modal-close {
+    float: right;
 }
