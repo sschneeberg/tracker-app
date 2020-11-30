@@ -1,12 +1,15 @@
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 
+
 module.exports = {
     up: function(queryInterface, Sequelize) {
         return queryInterface.bulkInsert('users', [{
             name: 'Simone Schneeberg',
             username: 'sschneeberg',
             password: bcrypt.hashSync('pass4word', 12),
+            avgCycle: 30,
+            avgPeriod: 7,
             createdAt: new Date(),
             updatedAt: new Date()
         }], { returning: true }).then(function(user) {
@@ -69,7 +72,8 @@ module.exports = {
                             updatedAt: new Date(),
                             periodId: periods[0].id,
                             content: 'First note, test note',
-                            title: 'Test Note'
+                            title: 'Test Note',
+                            date: moment().format('M D YYYY')
                         }], { returning: true }).then(function() {
                             return queryInterface.bulkInsert('meds', [{
                                 name: 'acetaminophen',

@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            models.symptom.belongsToMany(models.period, { through: 'periodsSymptoms' });
+            models.symptom.belongsToMany(models.period, { through: 'periodSymptoms' });
         }
     };
     symptom.init({
         type: DataTypes.STRING,
         severity: DataTypes.INTEGER,
-        date: DataTypes.DATE
+        date: DataTypes.STRING
     }, {
         sequelize,
         modelName: 'symptom',

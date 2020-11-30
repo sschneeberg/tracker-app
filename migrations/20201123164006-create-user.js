@@ -17,6 +17,12 @@ module.exports = {
             password: {
                 type: Sequelize.STRING
             },
+            avgCycle: {
+                type: Sequelize.INTEGER
+            },
+            avgPeriod: {
+                type: Sequelize.INTEGER
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE

@@ -12,10 +12,10 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             startDate: {
-                type: Sequelize.DATE
+                type: Sequelize.STRING
             },
             endDate: {
-                type: Sequelize.DATE
+                type: Sequelize.STRING
             },
             cycleLength: {
                 type: Sequelize.INTEGER
