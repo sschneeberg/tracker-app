@@ -36,7 +36,9 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 len: { args: [8, 99], msg: 'Password must be at least 8 characters' },
             }
-        }
+        },
+        avgCycle: DataTypes.INTEGER,
+        avgPeriod: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'user',

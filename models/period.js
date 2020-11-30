@@ -23,10 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,
         cycleLength: DataTypes.INTEGER,
-        predictedStart: DataTypes.DATE
+        periodLength: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'period',
     });
+
     return period;
 };

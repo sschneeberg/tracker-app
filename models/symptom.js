@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     };
     symptom.init({
         type: DataTypes.STRING,
-        severity: DataTypes.INTEGER
+        severity: DataTypes.INTEGER,
+        date: DataTypes.DATE
     }, {
         sequelize,
         modelName: 'symptom',
