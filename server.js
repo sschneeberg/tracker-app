@@ -44,15 +44,13 @@ app.get('/', (req, res) => {
     res.render('index', { alerts: res.locals.alerts });
 });
 
-app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile');
-});
 
 app.use('/auth', require('./controllers/auth'));
+app.use('/user', require('./controllers/user'));
 
 
 const port = process.env.PORT || 3000;
-const server = app.listen(PORT, () => {
+const server = app.listen(port, () => {
     console.log(`Connected on ${port}`);
 });
 

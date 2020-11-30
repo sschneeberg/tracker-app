@@ -33,9 +33,9 @@ db.user.findOrCreate({
     }
 }).then(([user, created]) => {
     db.activity.findAll({ where: { userId: user.id } }).then((activity) => {
-        console.log(activity)
+        console.log('activity', activity)
     })
-}) */
+})
 
 //query activity, notes, periods, symptoms by date
 const date = moment();
@@ -67,3 +67,5 @@ db.user.findOne().then(user => {
         })
     })
 })
+
+ */

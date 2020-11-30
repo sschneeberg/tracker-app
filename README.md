@@ -18,7 +18,7 @@ Express authentication template using Passport + flash messages + custom middlew
 | --------------- | ------------- | ------------------------------ |
 | id | Integer | Serial Primary Key, Auto-generated |
 | name | String | Must be provided |
-| email | String | Must be unique / used for login |
+| username | String | Must be unique / used for login |
 | password | String | Stored as a hash |
 | createdAt | Date | Auto-generated |
 | updatedAt | Date | Auto-generated |
