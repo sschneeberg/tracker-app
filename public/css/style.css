@@ -1,9 +1,14 @@
+main,
+footer {
+    padding-left: 300px;
+}
+
 main {
     background-color: whitesmoke;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 95vh;
+    height: calc(100vh - 65px);
     width: 100vw;
 }
 
@@ -17,10 +22,22 @@ nav a.brand-logo {
     color: rgb(84, 96, 109)
 }
 
+.sidenav {
+    height: calc(100% - 65px);
+    top: 65px;
+}
+
 .modal {
     padding: 20px;
 }
 
 span.modal-close {
     float: right;
+}
+
+@media (max-width: 985px) {
+    .sidenav {
+        height: 100vh;
+        top: 0;
+    }
 }
