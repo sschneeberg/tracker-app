@@ -32,8 +32,12 @@ router.get('/:month', isLoggedIn, (req, res) => {
             return period.symptoms
         });
         const monthData = fillMonth(month, notes, symptoms, periodWeeks)
-        res.render('user/userHome', { monthData, periods, periodWeeks, notes, symptoms });
+        res.render('user/userHome', { month: req.params.month, monthData, periods, periodWeeks, notes, symptoms });
     })
 });
+
+router.get('/:month/:day', isLoggedIn, (req, res) => {
+    res.send(`hello ${res.locals.currentUser.name}`)
+})
 
 module.exports = router

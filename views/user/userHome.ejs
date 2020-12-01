@@ -1,5 +1,7 @@
 <main class="userhome">
-    <h2>Profile Page</h2>
+    <h2>
+        <%=month%>
+    </h2>
     <% periods.forEach(period => { %>
         <p>period start:
             <%= period.startDate %>
@@ -32,22 +34,27 @@
                                             </p>
                                             <% }) %>
                                                 <% }) %>
-
                                                     <div class="calendar">
                                                         <% monthData.forEach(day => { %>
-                                                            <a href="">
-                                                                <div class="day">
-                                                                    <p>
-                                                                        <%= day.notes %>
-                                                                    </p>
-                                                                    <p>
-                                                                        <%= day.symptoms %>
-                                                                    </p>
-                                                                    <p>
-                                                                        <%= day.period %>
-                                                                    </p>
-                                                                </div>
-                                                            </a>
+                                                            <form id='day<%= day.day %>' action="/user/<%= month %>/<%=day.day %>">
+                                                                <input type="hidden" name="notes" value="<%=day.notes%>">
+                                                                <input type="hidden" name="symptoms" value="<%=day.symptoms%>">
+                                                                <input type="hidden" name="period" value="<%=day.period%>">
+                                                                <%#  <a href="javascript:{}" onclick="document.getElementById('day ').submit();return false;">%>
+                                                                    <div class="day">
+                                                                        <input id="selectDay" type="submit" value='<%= day.day%>'>
+                                                                        <p>
+                                                                            <%= day.notes %>
+                                                                        </p>
+                                                                        <p>
+                                                                            <%= day.symptoms %>
+                                                                        </p>
+                                                                        <p>
+                                                                            <%= day.period %>
+                                                                        </p>
+                                                                    </div>
+                                                                    </input>
+                                                            </form>
                                                             <% }) %>
                                                     </div>
 </main>

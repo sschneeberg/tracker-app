@@ -65,9 +65,22 @@ div.day {
     height: 10vh;
 }
 
+div.day input#selectDay {
+    align-self: flex-start;
+    border: unset;
+    background-color: transparent;
+}
+
+div.day input#selectDay:focus {
+    outline: none;
+}
+
 @media (max-width: 985px) {
     .sidenav {
         height: 100vh;
         top: 0;
+    }
+    main.userhome {
+        padding-left: 50px;
     }
 }
