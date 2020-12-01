@@ -20,10 +20,17 @@ router.get('/:month', isLoggedIn, (req, res) => {
                 sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('startDate')), month),
                 sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('endDate')), month)
             ]
-        }
+        },
+        include: [db.symptom, db.note]
     }).then(periods => {
         let periodWeeks = periods.map(period => period.getDays());
-        res.render('userHome', { periods, periodWeeks });
+        let notes = periods.map(function(period) {
+            return period.notes
+        });
+        let symptoms = periods.map(function(period) {
+            return period.symptoms
+        });
+        res.render('userHome', { periods, periodWeeks, notes, symptoms });
     })
 });
 

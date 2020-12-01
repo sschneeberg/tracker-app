@@ -14,5 +14,25 @@
                     <%= week %>
                 </p>
                 <% }) %>
+                    <% notes.forEach(notes => { %>
+                        <% notes.forEach(note => { %>
+                            <p> note:
+                                <%= note.date %>
+                                    <%= note.title %>
+                                        <%= note.content %>
+                            </p>
+                            <% }) %>
+
+                                <% }) %>
+                                    <% symptoms.forEach(symptoms => { %>
+                                        <% symptoms.forEach(symptom => { %>
+                                            <p> symptom:
+                                                <%= symptom.date %>,
+                                                    <%= symptom.type %>,
+                                                        <%= symptom.severity %>
+
+                                            </p>
+                                            <% }) %>
+                                                <% }) %>
 
 </main>
