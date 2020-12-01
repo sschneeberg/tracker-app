@@ -37,7 +37,7 @@ router.get('/:month', isLoggedIn, (req, res) => {
 });
 
 router.get('/:month/:day', isLoggedIn, (req, res) => {
-    res.send(`hello ${res.locals.currentUser.name}`)
+    res.render('user/showDay')
 })
 
 
