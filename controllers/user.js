@@ -40,4 +40,9 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
     res.send(`hello ${res.locals.currentUser.name}`)
 })
 
+
+router.post('/:month/:day', (req, res) => {
+    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+})
+
 module.exports = router

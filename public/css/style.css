@@ -39,6 +39,10 @@ a.sidenav-trigger {
     margin: 0;
 }
 
+a.sidenav-trigger i {
+    opacity: 0.7;
+}
+
 .sidenav {
     height: calc(100% - 65px);
     top: 65px;
