@@ -35,6 +35,10 @@ nav a.brand-logo {
     color: rgb(84, 96, 109)
 }
 
+a.sidenav-trigger {
+    margin: 0;
+}
+
 .sidenav {
     height: calc(100% - 65px);
     top: 65px;
@@ -61,11 +65,10 @@ div.calendar {
 
 div.day {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     background-color: white;
     border-radius: 12px;
-    padding: 5px;
+    padding: 8px;
     width: 9vw;
     height: 10vh;
 }
@@ -78,10 +81,16 @@ div.day input#selectDay {
     align-self: flex-start;
     border: unset;
     background-color: transparent;
+    font-size: 20px;
 }
 
 div.day input#selectDay:focus {
     outline: none;
+}
+
+div.day input#selectDay:hover {
+    color: turquoise;
+    cursor: pointer;
 }
 
 @media (max-width: 985px) {
@@ -91,5 +100,31 @@ div.day input#selectDay:focus {
     }
     main.userhome {
         padding-left: 50px;
+    }
+}
+
+@media (max-width: 550px) {
+    div.day {
+        width: 100%;
+    }
+    div.calendar {
+        grid-template-columns: repeat( 3, 1fr);
+        width: calc(100vw - 100px)
+    }
+    nav a.brand-logo {
+        visibility: hidden;
+    }
+}
+
+@media (max-width: 300px) {
+    div.day {
+        width: 100%;
+    }
+    div.calendar {
+        grid-template-columns: 1fr;
+        width: calc(100vw - 100px)
+    }
+    .sidenav {
+        width: 200px;
     }
 }
