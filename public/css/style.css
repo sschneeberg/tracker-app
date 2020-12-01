@@ -17,6 +17,7 @@ main.userhome {
     align-items: flex-start;
     justify-content: flex-start;
     padding-left: 350px;
+    overflow-y: scroll;
 }
 
 main#landing {
@@ -48,6 +49,20 @@ nav a.brand-logo {
 
 span.modal-close {
     float: right;
+}
+
+div.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+}
+
+div.day {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+    height: 10vh;
 }
 
 @media (max-width: 985px) {

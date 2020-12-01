@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../models');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const getMonth = require('../middleware/getMonth.js');
+const fillMonth = require('../middleware/fillMonth');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 
@@ -30,7 +31,8 @@ router.get('/:month', isLoggedIn, (req, res) => {
         let symptoms = periods.map(function(period) {
             return period.symptoms
         });
-        res.render('userHome', { periods, periodWeeks, notes, symptoms });
+        const monthData = fillMonth(month, notes, symptoms, periodWeeks)
+        res.render('user/userHome', { monthData, periods, periodWeeks, notes, symptoms });
     })
 });
 
