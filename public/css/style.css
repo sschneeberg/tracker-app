@@ -12,6 +12,17 @@ main {
     width: 100vw;
 }
 
+main.userhome {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 350px;
+}
+
+main#landing {
+    padding-left: 0;
+}
+
 nav {
     background-color: rgba(154, 230, 211, 0.76);
     padding: 5px 5px 5px 20px;
@@ -25,6 +36,10 @@ nav a.brand-logo {
 .sidenav {
     height: calc(100% - 65px);
     top: 65px;
+}
+
+#userinfo {
+    padding: 15px 0px 0px 20px;
 }
 
 .modal {

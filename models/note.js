@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         periodId: DataTypes.INTEGER,
         content: DataTypes.TEXT,
         title: DataTypes.STRING,
-        date: DataTypes.STRING
+        date: DataTypes.DATE
     }, {
         sequelize,
         modelName: 'note',

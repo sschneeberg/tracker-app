@@ -15,16 +15,16 @@ module.exports = {
         }], { returning: true }).then(function(user) {
             return queryInterface.bulkInsert('periods', [{
                 userId: user[0].id,
-                startDate: moment().subtract(7, 'd').format('M D YYYY'),
-                endDate: moment().format('M D YYYY'),
+                startDate: moment().subtract(7, 'd').toDate(),
+                endDate: moment().toDate(),
                 cycleLength: 28,
                 periodLength: 7,
                 createdAt: new Date(),
                 updatedAt: new Date()
             }, {
                 userId: user[0].id,
-                startDate: moment().subtract(1, 'month').subtract(7, 'd').format('M D YYYY'),
-                endDate: moment().subtract(1, 'month').format('M D YYYY'),
+                startDate: moment().subtract(1, 'month').subtract(7, 'd').toDate(),
+                endDate: moment().subtract(1, 'month').toDate(),
                 cycleLength: 28,
                 periodLength: 7,
                 createdAt: new Date(),
@@ -33,20 +33,20 @@ module.exports = {
                 return queryInterface.bulkInsert('symptoms', [{
                         type: 'cramps',
                         severity: 5,
-                        date: moment().subtract(7, 'd').format('M D YYYY'),
+                        date: moment().subtract(7, 'd').toDate(),
                         createdAt: new Date(),
                         updatedAt: new Date()
                     }, {
                         type: 'cramps',
                         severity: 3,
-                        date: moment().subtract(1, 'month').subtract(5, 'd').format('M D YYYY'),
+                        date: moment().subtract(1, 'month').subtract(5, 'd').toDate(),
                         createdAt: new Date(),
                         updatedAt: new Date()
                     },
                     {
                         type: 'level',
                         severity: 4,
-                        date: moment().subtract(4, 'd').format('M D YYYY'),
+                        date: moment().subtract(4, 'd').toDate(),
                         createdAt: new Date(),
                         updatedAt: new Date()
                     }
@@ -73,7 +73,7 @@ module.exports = {
                             periodId: periods[0].id,
                             content: 'First note, test note',
                             title: 'Test Note',
-                            date: moment().format('M D YYYY')
+                            date: moment().toDate()
                         }], { returning: true }).then(function() {
                             return queryInterface.bulkInsert('meds', [{
                                 name: 'acetaminophen',
@@ -88,7 +88,7 @@ module.exports = {
                                 }], { returning: true }).then(function() {
                                     return queryInterface.bulkInsert('activities', [{
                                         userId: user[0].id,
-                                        date: moment().format('M D YYYY'),
+                                        date: moment().toDate(),
                                         protection: 'condoms',
                                         createdAt: new Date(),
                                         updatedAt: new Date(),

@@ -1,4 +1,10 @@
 <ul id="slide-out" class="sidenav sidenav-fixed">
-    <li><a href="#!">First Sidebar Link</a></li>
-    <li><a href="#!">Second Sidebar Link</a></li>
+    <li id="userinfo">
+        <h4>
+            <%= currentUser.dataValues.username %>
+        </h4>
+    </li>
+    <li><a class="tooltipped" data-position="right" data-tooltip="Montly Overview" href="#!">Calendar</a></li>
+    <li><a class="tooltipped" data-position="right" data-tooltip="Data Summary" href="#!">Overview</a></li>
+    <li><a class="tooltipped" data-position="right" data-tooltip="Symptom Checker" href="#!">Advice</a></li>
 </ul>

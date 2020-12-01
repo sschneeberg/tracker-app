@@ -1,19 +1,22 @@
 const db = require('./models');
 const moment = require('moment');
 const sequelize = require('sequelize');
+const getMonth = require('./middleware/getMonth');
 const Op = sequelize.Op;
-
+/*
 //query periods from users including symptoms and notes
-/* db.user.findOne().then(user => {
+db.user.findOne().then(user => {
     db.period.findAll({
         where: { userId: user.id },
         include: [db.symptom, db.note]
     }).then(periods => {
+        let periodWeeks = periods.map(period => period.getDays());
         console.log(periods);
+        console.log('weeks:', periodWeeks);
         console.log('notes:', periods[0].notes);
         console.log('symptoms:', periods[0].symptoms);
     })
-}) 
+});
 
 //query users to meds (all)
 db.user.findOne().then(user => {
@@ -68,4 +71,6 @@ db.user.findOne().then(user => {
     })
 })
 
- */
+    */
+
+//console.log(getMonth('November'))

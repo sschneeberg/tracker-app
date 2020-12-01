@@ -2,6 +2,8 @@
 const {
     Model
 } = require('sequelize');
+const moment = require('moment');
+
 const db = require('.');
 module.exports = (sequelize, DataTypes) => {
     class period extends Model {
@@ -17,11 +19,27 @@ module.exports = (sequelize, DataTypes) => {
             models.period.belongsTo(models.user);
 
         }
+
+        //get all days of period
+        getDays() {
+            const days = [];
+            if (this.endDate) {
+                let day = this.startDate;
+                while (moment(day).format('M D YYYY') !== moment(this.endDate).format('M D YYYY')) {
+                    days.push(day);
+                    day = moment(day).add(1, 'd').toDate();
+                }
+                return days;
+            } else {
+                return;
+            }
+        }
+
     };
     period.init({
         userId: DataTypes.INTEGER,
-        startDate: DataTypes.STRING,
-        endDate: DataTypes.STRING,
+        startDate: DataTypes.DATE,
+        endDate: DataTypes.DATE,
         cycleLength: DataTypes.INTEGER,
         periodLength: DataTypes.INTEGER
     }, {

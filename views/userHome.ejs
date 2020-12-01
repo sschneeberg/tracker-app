@@ -1,5 +1,18 @@
-<main>
+<main class="userhome">
     <h2>Profile Page</h2>
+    <% periods.forEach(period => { %>
+        <p> period start:
+            <%= period.startDate %>
+        </p>
+        <p> period end:
+            <%= period.endDate %>
+        </p>
+        <% }) %>
 
-    <h3>Welcome to your PROFILE</h3>
+            <% periodWeeks.forEach(week => { %>
+                <p> week:
+                    <%= week %>
+                </p>
+                <% }) %>
+
 </main>
