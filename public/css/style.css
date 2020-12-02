@@ -88,11 +88,12 @@ div.alerts {
 }
 
 div.calendar {
-    margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 1rem;
     margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 div.day {

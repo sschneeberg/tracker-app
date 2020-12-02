@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
             models.user.hasMany(models.period);
             models.user.hasMany(models.activity);
+            models.user.hasMany(models.note);
             models.user.belongsToMany(models.med, { through: 'usersMeds' });
         }
     };

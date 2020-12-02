@@ -18,7 +18,7 @@ router.get('/login', (req, res) => {
 router.post('/signup', (req, res) => {
     db.user.findOrCreate({
         where: { username: req.body.username },
-        defaults: { name: req.body.name, password: req.body.password }
+        defaults: { name: req.body.name, password: req.body.password, avgPeriod: 7, avgCycle: 28 }
     }).then(([user, created]) => {
         if (created) {
             //redirect to home

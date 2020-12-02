@@ -12,13 +12,11 @@ module.exports = function(month, notes, symptoms, periodWeeks) {
                 symptoms: [],
             }
             //check notes
-        notes.forEach(notes => {
-            notes.forEach(note => {
-                //correct day and month
-                if (moment(note.date).format('MM') === month.toString() && moment(note.date).format('D') === i.toString()) {
-                    dayData.notes.push(note)
-                }
-            })
+        notes.forEach(note => {
+            //correct day and month
+            if (moment(note.date).format('MM') === month.toString() && moment(note.date).format('D') === i.toString()) {
+                dayData.notes.push(note)
+            }
         });
         //checkSymptoms
         symptoms.forEach(symptoms => {

@@ -70,7 +70,7 @@ module.exports = {
                         return queryInterface.bulkInsert('notes', [{
                             createdAt: new Date(),
                             updatedAt: new Date(),
-                            periodId: periods[0].id,
+                            userId: user[0].id,
                             content: 'First note, test note',
                             title: 'Test Note',
                             date: moment().toDate()

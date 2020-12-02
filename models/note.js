@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            models.note.belongsTo(models.period);
+            models.note.belongsTo(models.user);
         }
     };
     note.init({
-        periodId: DataTypes.INTEGER,
+        userId: DataTypes.INTEGER,
         content: DataTypes.TEXT,
         title: DataTypes.STRING,
         date: DataTypes.DATE

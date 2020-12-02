@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             models.period.belongsToMany(models.symptom, { through: 'periodSymptoms' });
-            models.period.hasMany(models.note);
             models.period.belongsTo(models.user);
 
         }
