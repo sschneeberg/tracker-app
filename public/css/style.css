@@ -127,10 +127,6 @@ div.day i {
     align-self: flex-end;
 }
 
-a#newNote i {
-    color: rgba(0, 0, 0, 0.603);
-}
-
 div.day button#selectDay {
     align-self: flex-start;
     border: unset;
@@ -151,13 +147,15 @@ div.arrows a:hover i {
     cursor: pointer;
 }
 
-div.row {
+div.row,
+section {
     width: 100%;
 }
 
 div.card {
     height: 30vh;
     overflow-y: scroll;
+    border-radius: 12px;
 }
 
 .card-title {
@@ -170,6 +168,8 @@ div.card {
 
 hr {
     width: 100%;
+    border: 1px solid rgb(158, 212, 199);
+    margin-bottom: 10px;
 }
 
 h4#notes {
@@ -178,6 +178,19 @@ h4#notes {
 
 h4#notes span {
     float: right;
+}
+
+h4#notes span i,
+a.new i {
+    color: rgb(158, 212, 199);
+}
+
+i.filled {
+    color: rgb(158, 212, 199);
+}
+
+i.empty {
+    color: lightgray;
 }
 
 @media (max-width: 985px) {
