@@ -1,3 +1,7 @@
+body {
+    background-color: whitesmoke;
+}
+
 main,
 footer {
     padding-left: 300px;

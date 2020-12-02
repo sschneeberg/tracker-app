@@ -18,3 +18,28 @@
         <input class="btn btn-secondary" type="submit" value="Sign up">
     </form>
 </main>
+
+
+<div class="modal" id="login">
+    <div class="modal-header">
+        <h5 class="modal-title" id="loginLabel">Login
+            <span class="modal-close">&times;</span> </h5>
+    </div>
+    <form action="/auth/login" method='POST'>
+
+        <div class="modal-content">
+            <div class="input-field">
+                <label for="auth-username">Username</label>
+                <input id="auth-username" type="text" name="username" required>
+            </div>
+            <div class="input-field">
+                <label for="auth-password">Password</label>
+                <input id="auth-password" type="password" name="password" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary">ENTER</button>
+        </div>
+
+    </form>
+</div>
