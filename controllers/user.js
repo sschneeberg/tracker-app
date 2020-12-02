@@ -85,7 +85,7 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
         where: {
             userId: user.id,
             [Op.or]: [{
-                    sequelize.literal SELECT Send_Customer FROM yourTable WHERE Send_Customer NOT LIKE '%[^0-9]%
+                    sequelize.literal ? ? ?
                 },
                 {
                     [sequelize.cast(sequelize.col('endDate'), 'date')]: {
