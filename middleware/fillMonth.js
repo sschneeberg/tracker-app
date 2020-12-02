@@ -4,7 +4,7 @@ const monthLengthMap = {
     01: 31,
     02: 28,
     03: 31,
-    04: 20,
+    04: 30,
     05: 31,
     06: 30,
     07: 31,
@@ -16,7 +16,10 @@ const monthLengthMap = {
 }
 
 module.exports = function(month, notes, symptoms, periodWeeks) {
-    const monthLength = monthLengthMap[month];
+    console.log(month)
+    let key = month;
+    if (month < 10) { key = month.split('')[1] }
+    const monthLength = monthLengthMap[key];
     const monthData = [];
     for (i = 1; i <= monthLength; i++) {
         const dayData = {
@@ -44,11 +47,14 @@ module.exports = function(month, notes, symptoms, periodWeeks) {
             })
         });
         //check period week
-        periodWeeks.forEach(day => {
-            if (moment(day).format('MM') === month.toString() && moment(day).format('D') === i.toString()) {
-                dayData.period = true;
-            }
+        periodWeeks.forEach(week => {
+            week.forEach(day => {
+                if (moment(day).format('MM') === month.toString() && moment(day).format('D') === i.toString()) {
+                    dayData.period = true;
+                }
+            })
         })
+        console.log(dayData);
         monthData.push(dayData);
     }
     return monthData;

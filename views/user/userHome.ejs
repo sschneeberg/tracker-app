@@ -1,6 +1,6 @@
 <main class="userhome">
     <h2>
-        <%=month%>
+        <%=month.name%>
     </h2>
     <% periods.forEach(period => { %>
         <p>period start:
@@ -34,9 +34,12 @@
                                             </p>
                                             <% }) %>
                                                 <% }) %>
+                                                    <div class="arrows">
+                                                        <a href="/user/<%= month.previousMonth %>"><i class="fas fa-chevron-left"></i></a><span><a href="/user/<%= month.nextMonth %>"><i class="fas fa-chevron-right"></i></a></span>
+                                                    </div>
                                                     <div class="calendar">
                                                         <% monthData.forEach(day => { %>
-                                                            <form id='day<%= day.day %>' action="/user/<%= month %>/<%=day.day %>" method="POST">
+                                                            <form id='day<%= day.day %>' action="/user/<%= month.num %>/<%=day.day %>" method="POST">
                                                                 <input type="hidden" name="notes" value="<%=day.notes%>">
                                                                 <input type="hidden" name="symptoms" value="<%=day.symptoms%>">
                                                                 <input type="hidden" name="period" value="<%=day.period%>">
@@ -52,7 +55,6 @@
                                                                                         <% if (day.period) { %>
                                                                                             <i class="far fa-moon fa-lg"></i>
                                                                                             <% } %>
-
                                                                     </div>
                                                                     </input>
                                                             </form>
