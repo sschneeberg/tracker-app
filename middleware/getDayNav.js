@@ -2,7 +2,6 @@ const getMonthLength = require("./getMonthLength");
 
 module.exports = function(day, month) {
     let monthLength = getMonthLength(month);
-    console.log(monthLength)
     let prevDay = parseInt(day) - 1;
     let nextDay = parseInt(day) + 1;
     if (prevDay === 0) {

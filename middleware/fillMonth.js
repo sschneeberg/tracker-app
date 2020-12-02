@@ -1,17 +1,18 @@
 const moment = require('moment');
 const getMonthLength = require('./getMonthLength');
 
-module.exports = function(month, notes, symptoms, periodWeeks) {
+module.exports = function(month, notes, symptoms, periodWeeks, activity) {
     const monthLength = getMonthLength(month);
     const monthData = [];
     for (i = 1; i <= monthLength; i++) {
         const dayData = {
-                day: i,
-                period: false,
-                notes: [],
-                symptoms: [],
-            }
-            //check notes
+            day: i,
+            period: false,
+            notes: [],
+            symptoms: [],
+            activities: []
+        };
+        //check notes
         notes.forEach(note => {
             //correct day and month
             if (moment(note.date).format('MM') === month.toString() && moment(note.date).format('D') === i.toString()) {
@@ -34,7 +35,14 @@ module.exports = function(month, notes, symptoms, periodWeeks) {
                     dayData.period = true;
                 }
             })
-        })
+        });
+        //check activity
+        activity.forEach(activity => {
+            //correct day and month
+            if (moment(activity.date).format('MM') === month.toString() && moment(activity.date).format('D') === i.toString()) {
+                dayData.activities.push(activity)
+            }
+        });
         monthData.push(dayData);
     }
     return monthData;

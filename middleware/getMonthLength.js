@@ -16,6 +16,5 @@ const monthLengthMap = {
 module.exports = function(month) {
     let key = month;
     if (month < 10) { key = month.split('')[1] }
-    console.log('month', month, key, monthLengthMap[key])
     return monthLengthMap[key]
 }

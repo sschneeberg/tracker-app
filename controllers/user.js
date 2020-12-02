@@ -43,17 +43,22 @@ router.get('/:month', isLoggedIn, (req, res) => {
         });
         db.note.findAll({
             where: {
-                [Op.and]: [sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('date')), month.num), { userId: user.id, }]
+                [Op.and]: [
+                    sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('date')), month.num),
+                    { userId: user.id, }
+                ]
             }
         }).then(notes => {
             db.activity.findAll({
                 where: {
-                    [Op.and]: [sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('date')), month.num), { userId: user.id, }]
+                    [Op.and]: [
+                        sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('date')), month.num),
+                        { userId: user.id, }
+                    ]
                 }
             }).then(activity => {
-                console.log('symptoms', symptoms)
-                const monthData = fillMonth(month.num, notes, symptoms, periodWeeks);
-                res.render('user/userHome', { month, monthData, periods, periodWeeks, notes, symptoms, activity });
+                const monthData = fillMonth(month.num, notes, symptoms, periodWeeks, activity);
+                res.render('user/userHome', { month, monthData, periods, periodWeeks, notes, symptoms });
             })
         })
     })
@@ -94,12 +99,36 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
         symptoms = symptoms.filter(symptom => {
             return (moment(symptom.date).format('D') === day.num.toString())
         })
-
+        db.note.findAll({
+            where: {
+                [Op.and]: [{
+                        [Op.and]: [
+                            sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('date')), month.num),
+                            sequelize.where(sequelize.fn("date_part", 'day', sequelize.col('date')), day.num),
+                        ]
+                    },
+                    { userId: user.id, }
+                ]
+            }
+        }).then(notes => {
+            db.activity.findAll({
+                where: {
+                    [Op.and]: [{
+                            [Op.and]: [
+                                sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('date')), month.num),
+                                sequelize.where(sequelize.fn("date_part", 'day', sequelize.col('date')), day.num),
+                            ]
+                        },
+                        { userId: user.id, }
+                    ]
+                }
+            }).then(activity => {
+                //pass data needed, find day of period if there is one
+                const periodInfo = getPeriodDay(period);
+                res.render('user/showDay', { month, day, notes, activity, symptoms, periodInfo })
+            })
+        })
     })
-
-
-
-    res.render('user/showDay', { month, day, })
 })
 
 //create new note
