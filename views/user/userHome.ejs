@@ -39,25 +39,20 @@
                                                     </div>
                                                     <div class="calendar">
                                                         <% monthData.forEach(day => { %>
-                                                            <form id='day<%= day.day %>' action="/user/<%= month.num %>/<%=day.day %>" method="POST">
-                                                                <input type="hidden" name="notes" value="<%=day.notes%>">
-                                                                <input type="hidden" name="symptoms" value="<%=day.symptoms%>">
-                                                                <input type="hidden" name="period" value="<%=day.period%>">
-                                                                <%#  <a href="javascript:{}" onclick="document.getElementById('day ').submit();return false;">%>
-                                                                    <div class="day">
-                                                                        <input id="selectDay" type="submit" value='<%= day.day%>'>
-                                                                        <% if (day.notes.length > 0){ %>
-                                                                            <i class="far fa-sticky-note fa-lg"></i>
-                                                                            <% } %>
-                                                                                <% if  (day.symptoms.length > 0){ %>
-                                                                                    <i class="fas fa-angle-double-up fa-lg"></i>
-                                                                                    <% } %>
-                                                                                        <% if (day.period) { %>
-                                                                                            <i class="far fa-moon fa-lg"></i>
-                                                                                            <% } %>
-                                                                    </div>
-                                                                    </input>
-                                                            </form>
+                                                            <a href="/user/<%=month.num%>/<%=day.day%>">
+                                                                <div class="day">
+                                                                    <button id="selectDay"><%= day.day%></button>
+                                                                    <% if (day.notes.length > 0){ %>
+                                                                        <i class="far fa-sticky-note fa-lg"></i>
+                                                                        <% } %>
+                                                                            <% if  (day.symptoms.length > 0){ %>
+                                                                                <i class="fas fa-angle-double-up fa-lg"></i>
+                                                                                <% } %>
+                                                                                    <% if (day.period) { %>
+                                                                                        <i class="far fa-moon fa-lg"></i>
+                                                                                        <% } %>
+                                                                </div>
+                                                            </a>
                                                             <% }) %>
                                                     </div>
 </main>

@@ -65,6 +65,7 @@ div.calendar {
     grid-template-columns: repeat(7, 1fr);
     gap: 1rem;
     margin: 0 auto;
+    margin-top: 10px;
 }
 
 div.day {
@@ -79,22 +80,30 @@ div.day {
 
 div.day i {
     align-self: flex-end;
+    color: black;
 }
 
-div.day input#selectDay {
+div.day button#selectDay {
     align-self: flex-start;
     border: unset;
     background-color: transparent;
     font-size: 20px;
 }
 
-div.day input#selectDay:focus {
+div.day button#selectDay:focus {
     outline: none;
 }
 
-div.day input#selectDay:hover {
+div.day button#selectDay:hover,
+div.day:hover button#selectDay,
+div.day:hover i {
     color: turquoise;
     cursor: pointer;
+}
+
+div.arrows a {
+    padding: 10px;
+    color: black;
 }
 
 @media (max-width: 985px) {
