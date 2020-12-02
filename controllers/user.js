@@ -82,33 +82,13 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
     console.log('start', startRange)
     console.log('end', endRange)
     db.period.findOne({
-        where: {
-            userId: user.id,
-            [Op.or]: [{
-                    sequelize.literal ? ? ?
-                },
-                {
-                    [sequelize.cast(sequelize.col('endDate'), 'date')]: {
-                        [Op.in]: endRange
-                    }
-                }
-            ]
-        },
-
-        [
-            sequelize.literal(`(
-                        SELECT * FROM periods
-                        WHERE
-                            CAST(CAST(period.startDate AS Date) AS Text) IN ${startRange}
+        where: sequelize.literal(`(
+                            CAST(CAST(period.startDate AS Date) AS Text) IN [${startRange}]
                             OR
-                            CAST(CAST(period.endDate AS Date) AS Text) IN ${endRange}
+                            CAST(CAST(period.endDate AS Date) AS Text) IN [${endRange}]
                             AND
                             userID = ${user.id}
-                    )`)
-        ]
-
-
-
+                    )`),
         include: [db.symptom]
     }).then(period => {
         console.log('period', period)
