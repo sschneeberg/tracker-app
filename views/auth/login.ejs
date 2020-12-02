@@ -1,9 +1,15 @@
-<form action="/auth/login" method="POST">
-    <label for="auth-username">Username</label>
-    <input id="auth-username" type="text" name="username" required>
+<main id="login">
+    <form action="/auth/login" method="POST">
+        <div class="input-field">
+            <label for="auth-username">Username</label>
+            <input id="auth-username" type="text" name="username" required>
+        </div>
 
-    <label for="auth-password">Password</label>
-    <input id="auth-password" type="password" name="password" required>
+        <div class="input-field">
+            <label for="auth-password">Password</label>
+            <input id="auth-password" type="password" name="password" required>
+        </div>
 
-    <input type="submit" value="Log In">
-</form>
+        <input class="btn btn-secondary" type="submit" value="Log In">
+    </form>
+</main>

@@ -29,12 +29,12 @@ router.post('/signup', (req, res) => {
             })(req, res);
         } else {
             //already have an exsiting account
-            req.flash('error', 'Account already exists for this username')
-            res.redirect('/');
+            req.flash('error', 'Account already exists for this Username, Please try another.')
+            res.redirect('/auth/signup');
         }
     }).catch(err => {
         console.log('Error', err);
-        req.flash('error', 'Please try again.');
+        req.flash('error', 'Please try again. Password must be at least 8 characters and usernames must be unique');
         res.redirect('/auth/signup');
     })
 });

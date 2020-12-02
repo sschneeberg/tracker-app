@@ -21,8 +21,20 @@ main.userhome {
     overflow-y: scroll;
 }
 
-main#landing {
+main#landing,
+main#login,
+main#signup {
     padding-left: 0;
+}
+
+main#login form,
+main#signup form {
+    width: 40vw;
+}
+
+main#login form input.btn,
+main#signup form input.btn {
+    float: right;
 }
 
 nav {
