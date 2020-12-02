@@ -1,11 +1,13 @@
-<main>
-    <div class="arrows">
-        <a href="/user/<%= month.num %>/<%= day.previousDay %>"><i class="fas fa-chevron-left"></i></a><span><a href="/user/<%= month.num %>/<%= day.nextDay %>"><i class="fas fa-chevron-right"></i></a></span>
+<main class='showDay'>
+    <div id="dayNav">
+        <div class="arrows">
+            <a href="/user/<%= month.num %>/<%= day.previousDay %>"><i class="fas fa-chevron-left"></i></a><span><a href="/user/<%= month.num %>/<%= day.nextDay %>"><i class="fas fa-chevron-right"></i></a></span>
+        </div>
+        <h2 id='showDay'>
+            <%= month.name %>
+                <%= day.num %>
+        </h2>
     </div>
-    <h2>
-        <%= month.name %>
-            <%= day.num %>
-    </h2>
     <p>
         hello
         <%= currentUser.name %>
