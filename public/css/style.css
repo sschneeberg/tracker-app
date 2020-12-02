@@ -76,6 +76,16 @@ span.modal-close {
     float: right;
 }
 
+div.alerts {
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: rgba(154, 230, 211, 0.76);
+    width: 40vw;
+    border-radius: 12px;
+    text-align: center;
+}
+
 div.calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
