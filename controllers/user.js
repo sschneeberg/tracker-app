@@ -99,9 +99,9 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
             sequelize.literal(`(
                         SELECT * FROM periods
                         WHERE
-                            CAST(period.startDate AS Date) IN ${startRange}
+                            CAST(CAST(period.startDate AS Date) AS Text) IN ${startRange}
                             OR
-                            CAST(period.endDate AS Date) IN ${endRange}
+                            CAST(CAST(period.endDate AS Date) AS Text) IN ${endRange}
                             AND
                             userID = ${user.id}
                     )`)
