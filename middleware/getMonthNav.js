@@ -1,6 +1,6 @@
 module.exports = function(monthNum) {
     let prevMonth = parseInt(monthNum) - 1;
-    let nextMonth = parseFloat(monthNum) + 1;
+    let nextMonth = parseInt(monthNum) + 1;
     if (prevMonth === 0) {
         prevMonth = 12;
     }

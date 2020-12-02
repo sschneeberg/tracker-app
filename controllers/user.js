@@ -5,8 +5,14 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 const getMonth = require('../middleware/getMonth.js');
 const fillMonth = require('../middleware/fillMonth');
 const getMonthNav = require('../middleware/getMonthNav');
+const getDayNav = require('../middleware/getDayNav');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
+const moment = require('moment');
+
+router.get('/', isLoggedIn, (req, res) => {
+    res.redirect(`/user/${moment().format('MM')}`)
+})
 
 router.get('/:month', isLoggedIn, (req, res) => {
     //find user's data:
@@ -42,12 +48,47 @@ router.get('/:month', isLoggedIn, (req, res) => {
 });
 
 router.get('/:month/:day', isLoggedIn, (req, res) => {
-    res.render('user/showDay')
+    //find user's data for the day
+    //add ability to add note on view
+    const month = {
+        name: getMonth(req.params.month),
+        num: req.params.month
+    };
+    const day = {
+        num: req.params.day,
+    };
+    [day.previousDay, day.nextDay] = getDayNav(day.num, month.num);
+
+    res.render('user/showDay', { month, day, })
+})
+
+//create new note
+router.get('/:month/:day/new', isLoggedIn, (req, res) => {
+    res.render('user/newDay')
 })
 
 
-router.post('/:month/:day', (req, res) => {
+//add period start/end
+router.post('/:month/:day/period', isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
+
+//add note
+router.post('/:month/:day/note', isLoggedIn, (req, res) => {
+    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+})
+
+//edit note
+router.put('/:month/:day', isLoggedIn, (req, res) => {
+    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+})
+
+//delete note
+router.delete('/:month/:day', isLoggedIn, (req, res) => {
+    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+})
+
+
+
 
 module.exports = router

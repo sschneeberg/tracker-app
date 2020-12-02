@@ -1,25 +1,8 @@
-const moment = require('moment')
-
-const monthLengthMap = {
-    01: 31,
-    02: 28,
-    03: 31,
-    04: 30,
-    05: 31,
-    06: 30,
-    07: 31,
-    08: 31,
-    09: 30,
-    10: 31,
-    11: 30,
-    12: 31
-}
+const moment = require('moment');
+const getMonthLength = require('./getMonthLength');
 
 module.exports = function(month, notes, symptoms, periodWeeks) {
-    console.log(month)
-    let key = month;
-    if (month < 10) { key = month.split('')[1] }
-    const monthLength = monthLengthMap[key];
+    const monthLength = getMonthLength(month);
     const monthData = [];
     for (i = 1; i <= monthLength; i++) {
         const dayData = {
@@ -54,7 +37,6 @@ module.exports = function(month, notes, symptoms, periodWeeks) {
                 }
             })
         })
-        console.log(dayData);
         monthData.push(dayData);
     }
     return monthData;
