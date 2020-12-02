@@ -19,14 +19,24 @@ module.exports = (sequelize, DataTypes) => {
 
         }
 
-        //get all days of period
+        //get all days of period if started
         getDays() {
-            const days = [];
-            if (this.endDate) {
-                let day = this.startDate;
-                while (moment(day).format('M D YYYY') !== moment(this.endDate).format('M D YYYY')) {
-                    days.push(day);
-                    day = moment(day).add(1, 'd').toDate();
+            if (this.startDate) {
+                const days = [];
+                //if period has started and ended
+                if (this.endDate) {
+                    let day = this.startDate;
+                    while (moment(day).format('M D YYYY') !== moment(this.endDate).format('M D YYYY')) {
+                        days.push(day);
+                        day = moment(day).add(1, 'd').toDate();
+                    }
+                } else {
+                    //if period has started but not ended count up to today
+                    let day = this.startDate;
+                    while (moment(day).format('M D YYYY') !== moment().format('M D YYYY')) {
+                        days.push(day);
+                        day = moment(day).add(1, 'd').toDate();
+                    }
                 }
                 return days;
             } else {

@@ -7,6 +7,7 @@ const fillMonth = require('../middleware/fillMonth');
 const getMonthNav = require('../middleware/getMonthNav');
 const getDayNav = require('../middleware/getDayNav');
 const getRanges = require('../middleware/getRanges');
+const getPeriodDay = require('../middleware/getPeriodDay');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
@@ -59,9 +60,9 @@ router.get('/:month', isLoggedIn, (req, res) => {
             }).then(activity => {
                 const monthData = fillMonth(month.num, notes, symptoms, periodWeeks, activity);
                 res.render('user/userHome', { month, monthData, periods, periodWeeks, notes, symptoms });
-            })
-        })
-    })
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
 });
 
 router.get('/:month/:day', isLoggedIn, (req, res) => {
@@ -95,10 +96,13 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
         },
         include: [db.symptom]
     }).then(period => {
-        let symptoms = period.symptoms;
-        symptoms = symptoms.filter(symptom => {
-            return (moment(symptom.date).format('D') === day.num.toString())
-        })
+        let symptoms = null;
+        if (period) {
+            symptoms = period.symptoms;
+            symptoms = symptoms.filter(symptom => {
+                return (moment(symptom.date).format('D') === day.num.toString())
+            })
+        }
         db.note.findAll({
             where: {
                 [Op.and]: [{
@@ -124,16 +128,21 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
                 }
             }).then(activity => {
                 //pass data needed, find day of period if there is one
-                const periodInfo = getPeriodDay(period);
+                const periodInfo = getPeriodDay(period, day.day);
                 res.render('user/showDay', { month, day, notes, activity, symptoms, periodInfo })
-            })
-        })
-    })
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
 })
 
 //create new note
 router.get('/:month/:day/new', isLoggedIn, (req, res) => {
     res.render('user/newDay')
+})
+
+//edit note
+router.get('/:month/:day/edit', isLoggedIn, (req, res) => {
+    res.render('user/editDay')
 })
 
 
@@ -147,7 +156,7 @@ router.post('/:month/:day/note', isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
 
-//edit note
+//update note
 router.put('/:month/:day', isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
