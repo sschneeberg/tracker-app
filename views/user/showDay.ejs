@@ -9,7 +9,7 @@
         </h2>
     </div>
     <section>
-        <h4 id='notes'>Symptoms: <span><a id="newNote" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+        <h4 class='notes'>Symptoms: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
         <% if (symptoms) { %>
             <div class="row">
                 <h5>
@@ -31,7 +31,7 @@
 
     </section>
     <section>
-        <h4 id='notes'>Notes: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+        <h4 class='notes'>Notes: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
         <hr>
         <% if (notes.length > 0) { %>
             <div class="row">

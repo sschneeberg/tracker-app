@@ -137,7 +137,14 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
 
 //create new note
 router.get('/:month/:day/new', isLoggedIn, (req, res) => {
-    res.render('user/newDay')
+    const month = {
+        name: getMonth(req.params.month),
+        num: req.params.month
+    };
+    const day = {
+        num: req.params.day,
+    };
+    res.render('user/newDay', { month, day })
 })
 
 //edit note
@@ -153,6 +160,16 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
 
 //add note
 router.post('/:month/:day/note', isLoggedIn, (req, res) => {
+    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+})
+
+//add activity
+router.post('/:month/:day/activity', isLoggedIn, (req, res) => {
+    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+})
+
+//add symptom
+router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
 

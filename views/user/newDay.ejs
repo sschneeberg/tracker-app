@@ -1,3 +1,74 @@
-<main class="input">
-    <p>new</p>
+<main class="new">
+    <h2>Edit:
+        <%= month.num%>
+            <%=day.num%>
+    </h2>
+    <h5>Add details to today:</h5>
+    <hr>
+    <ul class="collapsible expandable">
+        <li>
+            <h4 class='note collapsible-header'><span><i class="far fa-sticky-note fa-lg"></i></span> Notes: </h4>
+            <form class="collapsible-body" action="/<%=month.num%>/<%=day.num%>/note" method="POST">
+                <div class="input-field">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class="input-field">
+                    <label for="content">Content</label>
+                    <textarea name="content" id="content" class="materialize-textarea"></textarea required>
+                </div>
+                <div class="input-field">
+                    <input type="hidden" name="date" value="<%= new Date(2020, (month.num-1), day.num) %>">
+                </div>
+                <input class='btn btn-secondary' type='submit'>
+            </form>
+
+        </li>
+        <li>
+            <h4 class='note collapsible-header'><span><i class="fas fa-angle-double-up fa-lg"></i></span> Symptoms: </h4>
+            <form id='symptoms' class="collapsible-body" action="/<%=month.num%>/<%=day.num%>/symptom" method="POST">
+                <div class="input-field">
+                    <label for="type">Type</label>
+                    <input type="text" name="type" id="type" required>
+                    <span class="helper-text" >Please enter a simple descriptor <a class=" tooltipped" data-position="bottom" data-tooltip="I.e., cramps, nausea, headaches, etc. For a more detailed entry, please create a note.  To report the intensity of your period, use the keyword 'level'. "><i class="fas fa-info-circle"></i></a></span>
+                </div>
+                <div class="input-field" data-errormsg="">
+                    <label for="severity">Severity</label>
+                    <input type="text" name="severity" id="severity" required>
+                    <span class="helper-text">Please enter a number 1-5</span>
+                </div>
+                <div class="input-field">
+                    <input type="hidden" name="date" value="<%= new Date(2020, (month.num-1), day.num) %>">
+                </div>
+                <input class='btn btn-secondary' id='send' type='submit'>
+            </form>
+
+        </li>
+        <li>
+            <h4 class='note collapsible-header'><span><i class=
+                "far fa-star fa-lg"></i></span> Sexual Activity: </h4>
+            <form class="collapsible-body" action="/<%=month.num%>/<%=day.num%>/activity" method="POST">
+                <div class="input-field">
+                    <select id='protection' name="protection" required>
+                        <option value="" disabled selected>Choose your primary method</option>
+                        <option value="Condoms">Condoms</option>
+                        <option value="Birthcontrol">Birth Control (Any)</option>
+                        <option value="Diaphragm">Diaphragm</option>
+                        <option value="Other">Other</option>
+                        <option value="None">None</option>
+                    </select>
+                    <label for="protection">Protection used:</label>
+                </div>
+                <div class="input-field">
+                    <input type="hidden" name="date" value="<%= new Date(2020, (month.num-1), day.num) %>">
+                </div>
+                <input class='btn btn-secondary' type='submit'>
+            </form>
+        </li>
+    </ul>
+
+
+
+
+
 </main>

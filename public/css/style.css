@@ -17,7 +17,8 @@ main {
 }
 
 main.userhome,
-main.showDay {
+main.showDay,
+main.new {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -176,16 +177,17 @@ hr {
     margin-bottom: 10px;
 }
 
-h4#notes {
+h4.notes {
     width: 100%;
 }
 
-h4#notes span {
+h4.notes span {
     float: right;
 }
 
-h4#notes span i,
-a.new i {
+h4.notes span i,
+a.new i,
+a.tooltipped i {
     color: rgb(158, 212, 199);
 }
 
@@ -195,6 +197,14 @@ i.filled {
 
 i.empty {
     color: lightgray;
+}
+
+main.new ul {
+    width: 100%;
+}
+
+h4.collapsible-header {
+    background-color: whitesmoke;
 }
 
 @media (max-width: 985px) {
