@@ -156,12 +156,13 @@ section {
     width: 100%;
 }
 
-div.symptom {
+div#symptom {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 75px 0 25px;
+    height: 4.5rem;
 }
 
 div.card {
@@ -200,7 +201,6 @@ h4.notes span {
     float: right;
 }
 
-
 i#filled {
     color: rgb(158, 212, 199);
 }
@@ -208,7 +208,6 @@ i#filled {
 i#empty {
     color: lightgray;
 }
-
 
 h4.notes span i,
 a.new i,
