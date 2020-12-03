@@ -108,6 +108,7 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
                 ]
             }
         }).then(notes => {
+            console.log(notes)
             db.activity.findAll({
                 where: {
                     [Op.and]: [{
@@ -130,13 +131,32 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
 
 //create new note
 router.get('/:month/:day/new', isLoggedIn, (req, res) => {
-    res.render('user/newDay')
+    const month = {
+        name: getMonth(req.params.month),
+        num: req.params.month
+    };
+    const day = {
+        num: req.params.day,
+    };
+    res.render('user/newDay', { month, day })
 })
 
 //edit note
-router.get('/:month/:day/edit', isLoggedIn, (req, res) => {
-    res.render('user/editDay')
+router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
+    const month = {
+        name: getMonth(req.params.month),
+        num: req.params.month
+    };
+    const day = {
+        num: req.params.day,
+    };
+    db.note.findOne({
+        where: { id: req.params.id }
+    }).then((note) => {
+        res.render('user/editDay', { month, day, note })
+    }).catch(err => console.log(err))
 })
+
 
 
 //add period start/end
@@ -144,19 +164,80 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
 
-//add note
+//add note to db
 router.post('/:month/:day/note', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    const title = req.body.title;
+    const content = req.body.content;
+    const date = req.body.date;
+    const user = res.locals.currentUser;
+    db.note.create({
+        title: title,
+        content: content,
+        date: date,
+        userId: user.id
+
+    }).then(() => {
+        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+    }).catch(err => console.log(err))
+
+})
+
+//add activity
+router.post('/:month/:day/activity', isLoggedIn, (req, res) => {
+    const user = res.locals.currentUser;
+    const protection = req.body.protection;
+    const date = req.body.date;
+    db.activity.create({
+        userId: user.id,
+        date: date,
+        protection: protection
+    }).then(() => {
+        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+    }).catch(err => console.log(err))
+})
+
+//add symptom
+router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
+    const type = req.body.type;
+    const date = req.body.date;
+    const severity = req.body.severity;
+    const user = res.locals.currentUser;
+    db.symptom.create({
+        date: date,
+        type: type,
+        severity: severity
+    }).then(symptom => {
+        //find correct period and add to period
+        db.period.findOne({
+            where: {
+                userId: user.id,
+                //date criteria
+            }
+        }).then(() => {
+            res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+        }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+
 })
 
 //update note
-router.put('/:month/:day', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+router.put('/:month/:day/:id/note', isLoggedIn, (req, res) => {
+    db.note.update({
+        title: req.body.title,
+        content: req.body.conent,
+    }, {
+        where: req.params.id
+    })
+    res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
 })
 
 //delete note
-router.delete('/:month/:day', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+router.delete('/:month/:day/:id/note', isLoggedIn, (req, res) => {
+    db.note.destroy({
+        where: { id: req.params.id }
+    }).then(() => {
+        res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    }).catch(err => console.log(err))
 })
 
 

@@ -17,7 +17,9 @@ main {
 }
 
 main.userhome,
-main.showDay {
+main.showDay,
+main.new,
+main.edit {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -119,8 +121,10 @@ div#dayNav {
     justify-content: space-between;
 }
 
-div.arrows i {
+div.arrows i,
+div.arrows a {
     padding: 10px;
+    color: black;
 }
 
 div.day i {
@@ -162,8 +166,16 @@ div.symptom {
 
 div.card {
     height: 30vh;
-    overflow-y: scroll;
     border-radius: 12px;
+}
+
+div#activity {
+    height: 4.5rem;
+}
+
+div.card-body {
+    overflow: scroll;
+    width: 100%;
 }
 
 .card-title {
@@ -180,18 +192,14 @@ hr {
     margin-bottom: 10px;
 }
 
-h4#notes {
+h4.notes {
     width: 100%;
 }
 
-h4#notes span {
+h4.notes span {
     float: right;
 }
 
-h4#notes span i,
-a.new i {
-    color: rgb(158, 212, 199);
-}
 
 i#filled {
     color: rgb(158, 212, 199);
@@ -199,6 +207,25 @@ i#filled {
 
 i#empty {
     color: lightgray;
+}
+
+
+h4.notes span i,
+a.new i,
+a.tooltipped i {
+    color: rgb(158, 212, 199);
+}
+
+.card p i {
+    margin-right: 10px;
+}
+
+main.new ul {
+    width: 100%;
+}
+
+h4.collapsible-header {
+    background-color: whitesmoke;
 }
 
 @media (max-width: 985px) {

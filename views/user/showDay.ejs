@@ -9,6 +9,7 @@
         </h2>
     </div>
     <section>
+
         <h4 id='notes'>Symptoms: <span><a id="newNote" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
         <% if (symptoms) { %>
             <div class="row">
@@ -56,6 +57,29 @@
                     <% }) %>
             </div>
             <% } %>
+    </section>
+    <section>
+        <h4 class='notes'>Sexual Activity: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+        <hr>
+        <% if (activity) { %>
+            <div class="row">
+                <ul>
+                    <% activity.forEach(activity => { %>
+                        <div class="col s12">
+                            <div class="card" id='activity'>
+                                <div class="card-content">
+                                    <p><i class="far fa-star fa-sm"></i>Protection used:
+                                        <%= activity.protection %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </ul>
+            </div>
+            <% } %>
+
+
     </section>
     <div class="arrows">
         <a href="/user/<%= month.num %>"><i class="fas fa-chevron-left"></i>Back to <%= month.name %></a>
