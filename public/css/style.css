@@ -151,6 +151,10 @@ div.arrows a:hover i {
     cursor: pointer;
 }
 
+.collapsible {
+    border-radius: 12px;
+}
+
 div.row,
 section {
     width: 100%;

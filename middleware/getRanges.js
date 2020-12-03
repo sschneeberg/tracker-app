@@ -6,7 +6,7 @@ module.exports = function(monthNum, dayNum, cycleLength) {
     let endDay = moment(day);
     let startRange = [];
     let endRange = [];
-    for (let i = 0; i < cycleLength; i++) {
+    for (let i = 1; i < cycleLength; i++) {
         startRange.push(`CAST('${startDay.format('YYYY MM DD').split(' ').join('-')}' AS Text)`);
         endRange.push(`CAST('${endDay.format('YYYY MM DD').split(' ').join('-')}' AS Text)`);
         startDay.subtract(1, 'd');

@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
                 //if period has started and ended
                 if (this.endDate) {
                     let day = this.startDate;
-                    while (moment(day).format('M D YYYY') !== moment(this.endDate).format('M D YYYY')) {
+                    while (moment(day).format('M D YYYY') <= moment(this.endDate).format('M D YYYY')) {
                         days.push(day);
                         day = moment(day).add(1, 'd').toDate();
                     }

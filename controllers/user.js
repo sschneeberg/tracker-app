@@ -8,9 +8,11 @@ const getMonthNav = require('../middleware/getMonthNav');
 const getDayNav = require('../middleware/getDayNav');
 const getRanges = require('../middleware/getRanges');
 const getPeriodDay = require('../middleware/getPeriodDay');
+const findPeriod = require('../middleware/findPeriod');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
+
 
 
 router.get('/', isLoggedIn, (req, res) => {
@@ -79,6 +81,7 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
     let user = res.locals.currentUser;
     //find period that started or ended within range/cycle length of current day
     let [startRange, endRange] = getRanges(month.num, day.num, user.avgPeriod);
+    //try to change this to a function to be DRY
     db.period.findOne({
         where: sequelize.literal(`(
                             CAST(CAST("startDate" AS Date) AS Text) IN (${startRange})
@@ -138,7 +141,23 @@ router.get('/:month/:day/new', isLoggedIn, (req, res) => {
     const day = {
         num: req.params.day,
     };
-    res.render('user/newDay', { month, day })
+    [day.previousDay, day.nextDay] = getDayNav(day.num, month.num);
+    let user = res.locals.currentUser;
+    //find if there is a period this day
+    let [startRange, endRange] = getRanges(month.num, day.num, user.avgPeriod);
+    //try to change this to a function to be DRY
+    db.period.findOne({
+        where: sequelize.literal(`(
+                            CAST(CAST("startDate" AS Date) AS Text) IN (${startRange})
+                            OR
+                            CAST(CAST("endDate" AS Date) AS Text) IN (${endRange})
+                            AND
+                            "userId" = ${user.id}
+                    )`),
+        include: [db.symptom]
+    }).then(period => {
+        res.render('user/newDay', { month, day, period })
+    })
 })
 
 //edit note

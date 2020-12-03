@@ -24,6 +24,7 @@
             </form>
 
         </li>
+        <% if (period) { %>
         <li>
             <h4 class='note collapsible-header'><span><i class="fas fa-angle-double-up fa-lg"></i></span> Symptoms: </h4>
             <form id='symptoms' class="collapsible-body" action="/user/<%=month.num%>/<%=day.num%>/symptom" method="POST">
@@ -42,8 +43,8 @@
                 </div>
                 <input class='btn btn-secondary' id='send' type='submit'>
             </form>
-
         </li>
+        <% } %>
         <li>
             <h4 class='note collapsible-header'><span><i class=
                 "far fa-star fa-lg"></i></span> Sexual Activity: </h4>
