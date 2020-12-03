@@ -6,9 +6,9 @@ module.exports = function(monthNum, dayNum, cycleLength) {
     let endDay = moment(day);
     let startRange = [];
     let endRange = [];
-    for (i = 0; i < cycleLength; i++) {
-        startRange.push(startDay.format('YYYY MM DD').split(' ').join('-'));
-        endRange.push(endDay.format('YYYY MM DD').split(' ').join('-'));
+    for (let i = 0; i < cycleLength; i++) {
+        startRange.push(`CAST('${startDay.format('YYYY MM DD').split(' ').join('-')}' AS Text)`);
+        endRange.push(`CAST('${endDay.format('YYYY MM DD').split(' ').join('-')}' AS Text)`);
         startDay.subtract(1, 'd');
         endDay.add(1, 'd');
     }

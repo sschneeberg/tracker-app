@@ -12,19 +12,25 @@
         <h4 id='notes'>Symptoms: <span><a id="newNote" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
         <% if (symptoms) { %>
             <div class="row">
-                <h5>
-                    <%= symptom.type %>
-                </h5>
-                <span>
-                    <% for( let i = 1; i <= symptom.severity; i++ ) { %>
-                        <i class="fas fa-square filled"></i>
-                    <% } %>
-                    <% if (symptom.severity < 5) { %>
-                        <% for( let i = symptom.severity; i <= 5; i++ ) { %>
-                            <i class="fas fa-square empty"></i>
-                        <% } %>
-                    <% } %>
-                </span>
+                <% symptoms.forEach(symptom => { %>
+                    <div class="col s12 ">
+                        <div class="card symptom">
+                            <h5>
+                                <%= symptom.type %>
+                            </h5>
+                            <div class="symptom-severity">
+                                <% for( let i = 1; i <= symptom.severity; i++ ) { %>
+                                    <i class="fas fa-square" id="filled"></i>
+                                    <% } %>
+                                        <% if (symptom.severity < 5) { %>
+                                            <% for( let i = symptom.severity; i <= 5; i++ ) { %>
+                                                <i class="fas fa-square" id="empty"></i>
+                                                <% } %>
+                                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
             </div>
             <% } %>
                 <hr>
