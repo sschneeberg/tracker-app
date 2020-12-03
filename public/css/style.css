@@ -164,6 +164,10 @@ div.card {
     border-radius: 12px;
 }
 
+div#activity {
+    height: 4.5rem;
+}
+
 div.card-body {
     overflow: scroll;
     width: 100%;
@@ -203,6 +207,10 @@ i.filled {
 
 i.empty {
     color: lightgray;
+}
+
+.card p i {
+    margin-right: 10px;
 }
 
 main.new ul {
