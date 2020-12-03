@@ -159,8 +159,12 @@ section {
 
 div.card {
     height: 30vh;
-    overflow-y: scroll;
     border-radius: 12px;
+}
+
+div.card-body {
+    overflow: scroll;
+    width: 100%;
 }
 
 .card-title {

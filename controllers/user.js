@@ -115,6 +115,7 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
                 ]
             }
         }).then(notes => {
+            console.log(notes)
             db.activity.findAll({
                 where: {
                     [Op.and]: [{
@@ -158,9 +159,23 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
 
-//add note
+//add note to db
 router.post('/:month/:day/note', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    const title = req.body.title;
+    const content = req.body.content;
+    const date = req.body.date;
+    const user = res.locals.currentUser;
+    db.note.create({
+        title: title,
+        content: content,
+        date: date,
+        userId: user.id
+
+    }).then((note) => {
+        console.log(note)
+        res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    })
+
 })
 
 //add activity

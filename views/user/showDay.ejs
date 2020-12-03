@@ -41,9 +41,11 @@
                             <div class="card-content">
                                 <p class="card-title">
                                     <%= note.title %><span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/edit"><i class="fas fa-pen fa-xs"></i></a></span></p>
-                                <p>
-                                    <%= note.content %>
-                                </p>
+                                <div class="card-body">
+                                    <p>
+                                        <%= note.content %>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
