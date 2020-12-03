@@ -12,6 +12,5 @@ module.exports = async function(userid, startRange, endRange) {
                     )`),
         include: [db.symptom]
     })
-    console.log('function', period)
     return period;
 }
