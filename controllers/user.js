@@ -229,7 +229,12 @@ router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
 
 //update note
 router.put('/:month/:day/:id/note', isLoggedIn, (req, res) => {
-
+    db.note.update({
+        title: req.body.title,
+        content: req.body.conent,
+    }, {
+        where: req.params.id
+    })
     res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
 })
 
@@ -240,7 +245,6 @@ router.delete('/:month/:day/:id/note', isLoggedIn, (req, res) => {
     }).then(() => {
         res.redirect(`/user/${req.params.month}/${req.params.day}`)
     }).catch(err => console.log(err))
-
 })
 
 
