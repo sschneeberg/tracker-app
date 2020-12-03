@@ -1,3 +1,23 @@
 <main class="edit">
-    <p>new</p>
+    <h2>Edit Note: </h2>
+
+    <form id="edit" action="/user/<%=month.num%>/<%=day.num%>/<%= note.id %>/note?_method=PUT" method="POST">
+        <div class="input-field">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="<%= note.title %> " required>
+        </div>
+        <div class="input-field">
+            <label for="content">Content</label>
+            <textarea name="content" id="content" class="materialize-textarea"><%= note.content %> </textarea required>
+        </div>
+        <div class="input-field">
+            <input type="hidden" name="date" value="<%= note.date %>">
+        </div>
+        <input class='btn btn-secondary' type='submit'>
+    </form>
+
+    <form id="delete-button" action="/user/<%=month.num%>/<%=day.num%>/<%= note.id %>/note?_method=DELETE" method="POST">
+        <input class='btn btn-secondary' type='submit' value="DELETE">
+    </form>
+
 </main>

@@ -149,9 +149,21 @@ router.get('/:month/:day/new', isLoggedIn, (req, res) => {
 })
 
 //edit note
-router.get('/:month/:day/edit', isLoggedIn, (req, res) => {
-    res.render('user/editDay')
+router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
+    const month = {
+        name: getMonth(req.params.month),
+        num: req.params.month
+    };
+    const day = {
+        num: req.params.day,
+    };
+    db.note.findOne({
+        where: { id: req.params.id }
+    }).then((note) => {
+        res.render('user/editDay', { month, day, note })
+    }).catch(err => console.log(err))
 })
+
 
 
 //add period start/end
@@ -173,7 +185,7 @@ router.post('/:month/:day/note', isLoggedIn, (req, res) => {
 
     }).then(() => {
         res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
-    })
+    }).catch(err => console.log(err))
 
 })
 
@@ -188,22 +200,47 @@ router.post('/:month/:day/activity', isLoggedIn, (req, res) => {
         protection: protection
     }).then(() => {
         res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
-    })
+    }).catch(err => console.log(err))
 })
 
 //add symptom
 router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+    const type = req.body.type;
+    const date = req.body.date;
+    const severity = req.body.severity;
+    const user = res.locals.currentUser;
+    db.symptom.create({
+        date: date,
+        type: type,
+        severity: severity
+    }).then(symptom => {
+        //find correct period and add to period
+        db.period.findOne({
+            where: {
+                userId: user.id,
+                //date criteria
+            }
+        }).then(() => {
+            res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+        }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+
 })
 
 //update note
-router.put('/:month/:day', isLoggedIn, (req, res) => {
+router.put('/:month/:day/:id/note', isLoggedIn, (req, res) => {
+
     res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
 })
 
 //delete note
-router.delete('/:month/:day', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+router.delete('/:month/:day/:id/note', isLoggedIn, (req, res) => {
+    db.note.destroy({
+        where: { id: req.params.id }
+    }).then(() => {
+        res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    }).catch(err => console.log(err))
+
 })
 
 

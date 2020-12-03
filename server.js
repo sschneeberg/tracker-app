@@ -5,10 +5,11 @@ const app = express();
 const session = require('express-session');
 const passport = require('./config/ppConfig');
 const flash = require('connect-flash');
+const methodOverride = require('method-override');
 const secret_session = process.env.SECRET_SESSION;
 
 app.set('view engine', 'ejs');
-
+app.use(methodOverride('_method'));
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
