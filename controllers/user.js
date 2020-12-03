@@ -12,6 +12,7 @@ const findPeriod = require('../middleware/findPeriod');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
+const getDayOf = require('../middleware/getDayOf');
 
 
 
@@ -41,6 +42,9 @@ router.get('/:month', isLoggedIn, (req, res) => {
         include: [db.symptom]
     }).then(periods => {
         let periodWeeks = periods.map(period => period.getDays());
+        const today = new Date();
+        let dayOf = getDayOf(today, periodWeeks, true);
+        console.log(dayOf);
         let symptoms = periods.map(function(period) {
             return period.symptoms
         });
@@ -92,9 +96,14 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
                     )`),
         include: [db.symptom]
     }).then(period => {
+        let periodWeek = null;
         let symptoms = null;
+        let dayOf = null;
+        let today = new Date(2020, month.num - 1, day.num);
         if (period) {
             symptoms = period.symptoms;
+            periodWeek = period.getDays();
+            dayOf = getDayOf(today, periodWeek, false)
             symptoms = symptoms.filter(symptom => {
                 return (moment(symptom.date).format('D') === day.num.toString())
             })
@@ -111,7 +120,6 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
                 ]
             }
         }).then(notes => {
-            console.log(notes)
             db.activity.findAll({
                 where: {
                     [Op.and]: [{
@@ -126,7 +134,7 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
             }).then(activity => {
                 //pass data needed, find day of period if there is one
                 const periodInfo = getPeriodDay(period, day.day);
-                res.render('user/showDay', { month, day, notes, activity, symptoms, periodInfo })
+                res.render('user/showDay', { month, day, notes, activity, symptoms, periodInfo, dayOf })
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
@@ -177,7 +185,6 @@ router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
 })
 
 
-
 //add period start/end
 router.post('/:month/:day/period', isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
@@ -226,6 +233,9 @@ router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
         type: type,
         severity: severity
     }).then(symptom => {
+        //HERE
+        //HERE
+        //HERE
         //find correct period and add to period
         db.period.findOne({
             where: {
