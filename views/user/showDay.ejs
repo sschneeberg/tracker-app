@@ -8,83 +8,85 @@
                 <%= day.num %>
         </h2>
     </div>
-    <h4>Day
-        <%= dayOf %> of period</h4>
-    <section>
-        <% if (symptoms) { %>
-            <h4 class='notes'>Symptoms: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
-            <hr>
-            <% if (symptoms.length > 0) { %>
-                <div class="row">
-                    <% symptoms.forEach(symptom => { %>
-                        <div class="col s12 ">
-                            <div class="card" id="symptom">
-                                <h5>
-                                    <%= symptom.type.slice(0,1).toUpperCase() + symptom.type.slice(1,symptom.type.length) %>
-                                </h5>
-                                <div class="symptom-severity">
-                                    <% for( let i = 1; i <= symptom.severity; i++ ) { %>
-                                        <i class="fas fa-square" id="filled"></i>
-                                        <% } %>
-                                            <% if (symptom.severity < 5) { %>
-                                                <% for( let i = symptom.severity; i <= 5; i++ ) { %>
-                                                    <i class="fas fa-square" id="empty"></i>
-                                                    <% } %>
-                                                        <% } %>
+    <% if (dayOf) { %>
+        <h4>Day
+            <%= dayOf %> of period</h4>
+        <% } %>
+            <section>
+                <% if (symptoms) { %>
+                    <h4 class='notes'>Symptoms: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+                    <hr>
+                    <% if (symptoms.length > 0) { %>
+                        <div class="row">
+                            <% symptoms.forEach(symptom => { %>
+                                <div class="col s12 ">
+                                    <div class="card" id="symptom">
+                                        <h5>
+                                            <%= symptom.type.slice(0,1).toUpperCase() + symptom.type.slice(1,symptom.type.length) %>
+                                        </h5>
+                                        <div class="symptom-severity">
+                                            <% for( let i = 1; i <= symptom.severity; i++ ) { %>
+                                                <i class="fas fa-square" id="filled"></i>
+                                                <% } %>
+                                                    <% if (symptom.severity < 5) { %>
+                                                        <% for( let i = symptom.severity; i <= 5; i++ ) { %>
+                                                            <i class="fas fa-square" id="empty"></i>
+                                                            <% } %>
+                                                                <% } %>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <% }) %>
                         </div>
-                        <% }) %>
-                </div>
-                <% } %>
-                    <% } %>
-    </section>
-    <section>
-        <h4 class='notes'>Notes: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
-        <hr>
-        <% if (notes.length > 0) { %>
-            <div class="row">
-                <% notes.forEach(note => { %>
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div class="card-content">
-                                <p class="card-title">
-                                    <%= note.title %><span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/<%= note.id %> /edit"><i class="fas fa-pen fa-xs"></i></a></span></p>
-                                <div class="card-body">
-                                    <p>
-                                        <%= note.content %>
-                                    </p>
+                        <% } %>
+                            <% } %>
+            </section>
+            <section>
+                <h4 class='notes'>Notes: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+                <hr>
+                <% if (notes.length > 0) { %>
+                    <div class="row">
+                        <% notes.forEach(note => { %>
+                            <div class="col s12 m6 l4">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <p class="card-title">
+                                            <%= note.title %><span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/<%= note.id %> /edit"><i class="fas fa-pen fa-xs"></i></a></span></p>
+                                        <div class="card-body">
+                                            <p>
+                                                <%= note.content %>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
+                                <% }) %>
                             </div>
-                        </div>
-                        <% }) %>
+                            <% } %>
+            </section>
+            <section>
+                <h4 class='notes'>Sexual Activity: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+                <hr>
+                <% if (activity) { %>
+                    <div class="row">
+                        <ul>
+                            <% activity.forEach(activity => { %>
+                                <div class="col s12">
+                                    <div class="card" id='activity'>
+                                        <div class="card-content">
+                                            <p><i class="far fa-star fa-sm"></i>Protection used:
+                                                <%= activity.protection %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </ul>
                     </div>
                     <% } %>
-    </section>
-    <section>
-        <h4 class='notes'>Sexual Activity: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
-        <hr>
-        <% if (activity) { %>
-            <div class="row">
-                <ul>
-                    <% activity.forEach(activity => { %>
-                        <div class="col s12">
-                            <div class="card" id='activity'>
-                                <div class="card-content">
-                                    <p><i class="far fa-star fa-sm"></i>Protection used:
-                                        <%= activity.protection %>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <% }) %>
-                </ul>
+
+
+            </section>
+            <div class="arrows">
+                <a href="/user/<%= month.num %>"><i class="fas fa-chevron-left"></i>Back to <%= month.name %></a>
             </div>
-            <% } %>
-
-
-    </section>
-    <div class="arrows">
-        <a href="/user/<%= month.num %>"><i class="fas fa-chevron-left"></i>Back to <%= month.name %></a>
-    </div>
 </main>
