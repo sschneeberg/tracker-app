@@ -120,8 +120,10 @@ div#dayNav {
     justify-content: space-between;
 }
 
-div.arrows i {
+div.arrows i,
+div.arrows a {
     padding: 10px;
+    color: black;
 }
 
 div.day i {

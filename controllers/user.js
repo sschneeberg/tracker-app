@@ -171,31 +171,39 @@ router.post('/:month/:day/note', isLoggedIn, (req, res) => {
         date: date,
         userId: user.id
 
-    }).then((note) => {
-        console.log(note)
-        res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    }).then(() => {
+        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
     })
 
 })
 
 //add activity
 router.post('/:month/:day/activity', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    const user = res.locals.currentUser;
+    const protection = req.body.protection;
+    const date = req.body.date;
+    db.activity.create({
+        userId: user.id,
+        date: date,
+        protection: protection
+    }).then(() => {
+        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+    })
 })
 
 //add symptom
 router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
 })
 
 //update note
 router.put('/:month/:day', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
 })
 
 //delete note
 router.delete('/:month/:day', isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
+    res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
 })
 
 
