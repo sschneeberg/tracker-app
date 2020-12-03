@@ -131,10 +131,6 @@ div.day i {
     align-self: flex-end;
 }
 
-a#newNote i {
-    color: rgba(0, 0, 0, 0.603);
-}
-
 div.day button#selectDay {
     align-self: flex-start;
     border: unset;
@@ -158,6 +154,14 @@ div.arrows a:hover i {
 div.row,
 section {
     width: 100%;
+}
+
+div.symptom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 75px 0 25px;
 }
 
 div.card {
@@ -196,18 +200,20 @@ h4.notes span {
     float: right;
 }
 
+
+i#filled {
+    color: rgb(158, 212, 199);
+}
+
+i#empty {
+    color: lightgray;
+}
+
+
 h4.notes span i,
 a.new i,
 a.tooltipped i {
     color: rgb(158, 212, 199);
-}
-
-i.filled {
-    color: rgb(158, 212, 199);
-}
-
-i.empty {
-    color: lightgray;
 }
 
 .card p i {

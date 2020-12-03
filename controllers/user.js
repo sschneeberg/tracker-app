@@ -78,22 +78,15 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
     [day.previousDay, day.nextDay] = getDayNav(day.num, month.num);
     let user = res.locals.currentUser;
     //find period that started or ended within range/cycle length of current day
-    let [startRange, endRange] = getRanges(day.num, user.avgPeriod);
+    let [startRange, endRange] = getRanges(month.num, day.num, user.avgPeriod);
     db.period.findOne({
-        where: {
-            userId: user.id,
-            [Op.or]: [{
-                    startDate: {
-                        [Op.in]: startRange
-                    }
-                },
-                {
-                    endDate: {
-                        [Op.in]: endRange
-                    }
-                }
-            ]
-        },
+        where: sequelize.literal(`(
+                            CAST(CAST("startDate" AS Date) AS Text) IN (${startRange})
+                            OR
+                            CAST(CAST("endDate" AS Date) AS Text) IN (${endRange})
+                            AND
+                            "userId" = ${user.id}
+                    )`),
         include: [db.symptom]
     }).then(period => {
         let symptoms = null;

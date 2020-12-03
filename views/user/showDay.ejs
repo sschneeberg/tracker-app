@@ -9,29 +9,36 @@
         </h2>
     </div>
     <section>
-        <h4 class='notes'>Symptoms: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+
+        <h4 id='notes'>Symptoms: <span><a id="newNote" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
         <% if (symptoms) { %>
             <div class="row">
-                <h5>
-                    <%= symptom.type %>
-                </h5>
-                <span>
-                    <% for( let i = 1; i <= symptom.severity; i++ ) { %>
-                        <i class="fas fa-square filled"></i>
-                    <% } %>
-                    <% if (symptom.severity < 5) { %>
-                        <% for( let i = symptom.severity; i <= 5; i++ ) { %>
-                            <i class="fas fa-square empty"></i>
-                        <% } %>
-                    <% } %>
-                </span>
+                <% symptoms.forEach(symptom => { %>
+                    <div class="col s12 ">
+                        <div class="card symptom">
+                            <h5>
+                                <%= symptom.type %>
+                            </h5>
+                            <div class="symptom-severity">
+                                <% for( let i = 1; i <= symptom.severity; i++ ) { %>
+                                    <i class="fas fa-square" id="filled"></i>
+                                    <% } %>
+                                        <% if (symptom.severity < 5) { %>
+                                            <% for( let i = symptom.severity; i <= 5; i++ ) { %>
+                                                <i class="fas fa-square" id="empty"></i>
+                                                <% } %>
+                                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
             </div>
             <% } %>
                 <hr>
 
     </section>
     <section>
-        <h4 class='notes'>Notes: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
+        <h4 id='notes'>Notes: <span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/new"><i class="fas fa-plus fa-xs"></i></a></span></h4>
         <hr>
         <% if (notes.length > 0) { %>
             <div class="row">
@@ -40,13 +47,12 @@
                         <div class="card">
                             <div class="card-content">
                                 <p class="card-title">
-                                    <%= note.title %><span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/<%= note.id %> /edit"><i class="fas fa-pen fa-xs"></i></a></span></p>
+                                <%= note.title %><span><a class="new" href="/user/<%= month.num%>/<%=day.num%>/<%= note.id %> /edit"><i class="fas fa-pen fa-xs"></i></a></span></p>
                                 <div class="card-body">
                                     <p>
                                         <%= note.content %>
                                     </p>
                                 </div>
-                            </div>
                         </div>
                     </div>
                     <% }) %>
@@ -76,7 +82,6 @@
 
 
     </section>
-
     <div class="arrows">
         <a href="/user/<%= month.num %>"><i class="fas fa-chevron-left"></i>Back to <%= month.name %></a>
     </div>
