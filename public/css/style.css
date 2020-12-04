@@ -207,6 +207,7 @@ section.data-search {
     border-radius: 12px;
     border: 1px rgb(172, 172, 172) solid;
     background-color: whitesmoke;
+    margin: 10px;
 }
 
 div.day-body span#add {

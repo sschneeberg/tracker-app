@@ -11,7 +11,7 @@
     </ul>
 
     <form action="/user/meds" method="POST">
-        <input type="hidden" name="name" value="<%= drug.slice(0,1).toUpperCase() + drug.slice(1,drug.length) %>">
+        <input type="hidden" name="name" value="<%= drug.toLowerCase() %>">
         <div class="input-field">
             <input class="btn btn-secondary" type="submit" value="ADD MEDICATION">
         </div>

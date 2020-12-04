@@ -35,11 +35,15 @@ router.get('/advice/results', isLoggedIn, (req, res) => {
             axios.get(`http://mapi-us.iterar.co/api/autocomplete?query=${req.query.drug.slice(0,3)}`).then(data => {
                 let suggestions = data.data.suggestions;
                 res.render('user/advice', { suggestions })
-            })
+            }).catch(err => console.log(err))
         } else {
             res.render('user/adviceResults', { activeIngredients, drug: req.query.drug })
         }
-    })
+    }).catch(err => console.log(err))
+})
+
+router.get('/summary', isLoggedIn, (req, res) => {
+    res.render('user/summary')
 })
 
 router.get('/:month', isLoggedIn, (req, res) => {
@@ -195,7 +199,7 @@ router.get('/:month/:day/new', isLoggedIn, (req, res) => {
         include: [db.symptom]
     }).then(period => {
         res.render('user/newDay', { month, day, period })
-    })
+    }).catch(err => console.log(err))
 })
 
 //edit note
@@ -280,6 +284,21 @@ router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
 
 })
 
+//add medication
+router.post('/meds', isLoggedIn, (req, res) => {
+    let user = res.locals.currentUser;
+    db.med.findOrCreate({
+        where: { name: req.body.name }
+    }).then(([med, created]) => {
+        db.user.findOne({
+            where: { id: user.id }
+        }).then(user => {
+            user.addMed(med);
+            res.redirect('/user/summary')
+        }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+})
+
 //update note
 router.put('/:month/:day/:id/note', isLoggedIn, (req, res) => {
     db.note.update({
@@ -287,9 +306,11 @@ router.put('/:month/:day/:id/note', isLoggedIn, (req, res) => {
         content: req.body.conent,
     }, {
         where: req.params.id
-    })
-    res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+    }).then(() => {
+        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+    }).catch(err => console.log(err))
 })
+
 
 //delete note
 router.delete('/:month/:day/:id/note', isLoggedIn, (req, res) => {
@@ -304,7 +325,6 @@ router.delete('/:month/:day/:id/note', isLoggedIn, (req, res) => {
 //errors
 router.get('*', (req, res) => {
     res.render('error')
-
 })
 
 
