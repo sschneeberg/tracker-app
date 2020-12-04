@@ -11,15 +11,11 @@ const getPeriodDay = require('../middleware/getPeriodDay');
 const getResults = require('../middleware/getResults');
 const getDayOf = require('../middleware/getDayOf');
 const predictStart = require('../middleware/predictStart');
-
 //const findPeriod = require('../middleware/findPeriod');  <-- Work in progress
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
 const axios = require('axios');
-
-
-
 
 router.get('/', isLoggedIn, (req, res) => {
     res.redirect(`/user/${moment().format('MM')}`)
@@ -246,7 +242,8 @@ router.get('/:month/:day/new', isLoggedIn, (req, res) => {
     }).catch(err => console.log(err))
 })
 
-//edit note
+//edit note -- NOT IN USE ANY MORE
+/*
 router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
     if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
         res.redirect('*');
@@ -263,7 +260,7 @@ router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
     }).then((note) => {
         res.render('user/editDay', { month, day, note })
     }).catch(err => console.log(err))
-})
+}) */
 
 
 //add period start/end
