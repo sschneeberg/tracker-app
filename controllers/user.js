@@ -211,7 +211,7 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
     }).catch(err => console.log(err))
 })
 
-//create new note
+//create new note, symptom, activity log
 router.get('/:month/:day/new', isLoggedIn, (req, res) => {
     if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
         res.render('error');
@@ -281,7 +281,7 @@ router.post('/:month/:day/note', isLoggedIn, (req, res) => {
         userId: user.id
 
     }).then(() => {
-        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+        res.redirect(`/user/${req.params.month}/${req.params.day}`)
     }).catch(err => console.log(err))
 
 })
@@ -296,7 +296,7 @@ router.post('/:month/:day/activity', isLoggedIn, (req, res) => {
         date: date,
         protection: protection
     }).then(() => {
-        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+        res.redirect(`/user/${req.params.month}/${req.params.day}`)
     }).catch(err => console.log(err))
 })
 
@@ -319,7 +319,7 @@ router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
             }
         }).then((period) => {
             period.addSymptom(symptom);
-            res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+            res.redirect(`/user/${req.params.month}/${req.params.day}`)
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 
