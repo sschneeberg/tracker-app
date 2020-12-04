@@ -24,7 +24,8 @@ main#error {
 main.userhome,
 main.showDay,
 main.new,
-main.edit {
+main.edit,
+main#advice {
     align-items: flex-start;
     justify-content: flex-start;
     padding-left: 350px;
@@ -44,7 +45,8 @@ main#signup form {
 }
 
 main#login form input.btn,
-main#signup form input.btn {
+main#signup form input.btn,
+main#advice form input.btn {
     float: right;
 }
 
@@ -164,6 +166,16 @@ section {
     width: 100%;
 }
 
+main#advice section#symptom-search {
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+main#advice section#symptom-search:hover {
+    background-color: rgb(247, 215, 215);
+}
+
 div#symptom {
     width: 100%;
     display: flex;
@@ -185,6 +197,21 @@ div#activity {
 div.card-body {
     overflow: scroll;
     width: 100%;
+}
+
+div.day-body {
+    position: relative;
+    width: 100%;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px rgb(172, 172, 172) solid;
+    background-color: whitesmoke;
+}
+
+div.day-body span#add {
+    position: absolute;
+    left: 95%;
+    top: 30px;
 }
 
 .card-title {
@@ -217,7 +244,6 @@ i#empty {
     color: lightgray;
 }
 
-h4.notes span i,
 a.new i,
 a.tooltipped i {
     color: rgb(158, 212, 199);
@@ -244,7 +270,8 @@ h4.collapsible-header {
     main.showDay,
     main#error,
     main.edit,
-    main.new {
+    main.new,
+    main#advice {
         padding-left: 50px;
     }
     div#dayNav {

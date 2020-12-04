@@ -20,6 +20,14 @@ router.get('/', isLoggedIn, (req, res) => {
     res.redirect(`/user/${moment().format('MM')}`)
 })
 
+router.get('/advice', isLoggedIn, (req, res) => {
+    res.render('user/advice')
+})
+
+router.get('/advice/results', isLoggedIn, (req, res) => {
+    // API CALL
+})
+
 router.get('/:month', isLoggedIn, (req, res) => {
     //find user's data:
     //all info for this month
