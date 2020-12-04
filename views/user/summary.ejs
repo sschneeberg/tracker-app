@@ -1,6 +1,16 @@
 <main class='advice'>
     <h3>Summary</h3>
-
+    <section class="data-search">
+        <h5>My Medications</h5>
+        <ul>
+            <% for( let i = 0; i < meds.length; i++ ) { %>
+                <li class="list" id="med-list">
+                    <i class="fas fa-prescription-bottle fa-sm"></i>
+                    <%= meds[i].name.slice(0,1).toUpperCase() + meds[i].name.slice(1,meds[i].length)%>
+                </li>
+                <% } %>
+        </ul>
+    </section>
 
 
     <section class="data-search">

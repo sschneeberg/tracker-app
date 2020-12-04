@@ -78,3 +78,13 @@ db.user.findOne().then(user => {
 //console.log(moment().format('MM') == 12)
 
 //console.log(moment('Dec 14 2020', 'MMM DD YYYY').toDate())
+
+/*
+db.user.findOne({
+    where: { id: 1 },
+    include: [db.med]
+}).then(user => {
+    const meds = user.meds;
+    console.log(meds)
+}).catch(err => console.log(err))
+*/

@@ -48,16 +48,32 @@ router.get('/advice/results', isLoggedIn, (req, res) => {
 
 //user data summary
 router.get('/summary', isLoggedIn, (req, res) => {
-    res.render('user/summary', { results: [] })
+    let user = res.locals.currentUser;
+    db.user.findOne({
+        where: { id: user.id },
+        include: [db.med]
+    }).then(user => {
+        const meds = user.meds;
+        res.render('user/summary', { results: [], meds })
+    }).catch(err => console.log(err))
+
 })
 
 //data results
 router.get('/summary/symptoms', isLoggedIn, (req, res) => {
     const type = req.query.type.toLowerCase();
-    getResults(type).then(results => {
-        console.log(results[0][0].severity)
-        res.render('user/summary', { results: results[0] })
-    })
+    let user = res.locals.currentUser;
+    let meds = [];
+    db.user.findOne({
+        where: { id: user.id },
+        include: [db.med]
+    }).then(user => {
+        meds = user.meds;
+        getResults(type).then(results => {
+            res.render('user/summary', { results: results[0], meds })
+        }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+
 })
 
 //data results
