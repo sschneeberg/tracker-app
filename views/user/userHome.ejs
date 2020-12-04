@@ -6,29 +6,33 @@
         <h4>Day
             <%= dayOf %> of Period
         </h4>
-        <% } %>
-            <div class="arrows">
-                <a href="/user/<%= month.previousMonth %>"><i class="fas fa-chevron-left"></i></a><span><a href="/user/<%= month.nextMonth %>"><i class="fas fa-chevron-right"></i></a></span>
-            </div>
-            <div class="calendar">
-                <% monthData.forEach(day => { %>
-                    <a href="/user/<%=month.num%>/<%=day.day%>">
-                        <div class="day">
-                            <button id="selectDay"><%= day.day%></button>
-                            <% if (day.notes.length > 0){ %>
-                                <i class="far fa-sticky-note fa-lg"></i>
-                                <% } %>
-                                    <% if  (day.symptoms.length > 0){ %>
-                                        <i class="fas fa-angle-double-up fa-lg"></i>
-                                        <% } %>
-                                            <% if  (day.activities.length > 0){ %>
-                                                <i class="far fa-star fa-lg"></i>
-                                                <% } %>
-                                                    <% if (day.period) { %>
-                                                        <i class="far fa-moon fa-lg"></i>
-                                                        <% } %>
-                        </div>
-                    </a>
-                    <% }) %>
-            </div>
+        <% } else { %>
+            <h4>Period Starts
+                <%= predictedStart %>
+            </h4>
+            <% } %>
+                <div class="arrows">
+                    <a href="/user/<%= month.previousMonth %>"><i class="fas fa-chevron-left"></i></a><span><a href="/user/<%= month.nextMonth %>"><i class="fas fa-chevron-right"></i></a></span>
+                </div>
+                <div class="calendar">
+                    <% monthData.forEach(day => { %>
+                        <a href="/user/<%=month.num%>/<%=day.day%>">
+                            <div class="day">
+                                <button id="selectDay"><%= day.day%></button>
+                                <% if (day.notes.length > 0){ %>
+                                    <i class="far fa-sticky-note fa-lg"></i>
+                                    <% } %>
+                                        <% if  (day.symptoms.length > 0){ %>
+                                            <i class="fas fa-angle-double-up fa-lg"></i>
+                                            <% } %>
+                                                <% if  (day.activities.length > 0){ %>
+                                                    <i class="far fa-star fa-lg"></i>
+                                                    <% } %>
+                                                        <% if (day.period) { %>
+                                                            <i class="far fa-moon fa-lg"></i>
+                                                            <% } %>
+                            </div>
+                        </a>
+                        <% }) %>
+                </div>
 </main>

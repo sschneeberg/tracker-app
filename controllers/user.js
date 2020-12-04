@@ -10,6 +10,8 @@ const getRanges = require('../middleware/getRanges');
 const getPeriodDay = require('../middleware/getPeriodDay');
 const getResults = require('../middleware/getResults');
 const getDayOf = require('../middleware/getDayOf');
+const predictStart = require('../middleware/predictStart');
+
 //const findPeriod = require('../middleware/findPeriod');  <-- Work in progress
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
@@ -114,6 +116,7 @@ router.get('/:month', isLoggedIn, (req, res) => {
         let periodWeeks = periods.map(period => period.getDays());
         const today = new Date();
         let dayOf = getDayOf(today, periodWeeks, true);
+        let predictedStart = predictStart(periods, user);
         let symptoms = periods.map(function(period) {
             return period.symptoms
         });
@@ -134,7 +137,7 @@ router.get('/:month', isLoggedIn, (req, res) => {
                 }
             }).then(activity => {
                 const monthData = fillMonth(month.num, notes, symptoms, periodWeeks, activity);
-                res.render('user/userHome', { month, monthData, periods, periodWeeks, notes, symptoms, dayOf });
+                res.render('user/userHome', { month, monthData, periods, periodWeeks, notes, symptoms, dayOf, predictedStart });
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
