@@ -1,4 +1,4 @@
-<main id='advice'>
+<main class='advice'>
     <h3>Medical Advice</h3>
 
     <section id="drug-search">
@@ -13,6 +13,17 @@
                 <input class="btn btn-secodnary" type="submit" value="SEARCH">
             </div>
         </form>
+        <% if (suggestions.length > 0) { %>
+            <p>No results found</p>
+            <p>Did you mean:</p>
+            <ul>
+                <% for( let i = 0; i < Math.min(suggestions.length,4); i++ ) { %>
+                    <li>
+                        <%= suggestions[i] %>
+                    </li>
+                    <% } %>
+            </ul>
+            <% } %>
     </section>
 
     <section id='symptom-search' class="tooltipped" data-position="bottom" data-tooltip="Coming Soon">

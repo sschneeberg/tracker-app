@@ -8,11 +8,12 @@ const getMonthNav = require('../middleware/getMonthNav');
 const getDayNav = require('../middleware/getDayNav');
 const getRanges = require('../middleware/getRanges');
 const getPeriodDay = require('../middleware/getPeriodDay');
-const findPeriod = require('../middleware/findPeriod');
+//const findPeriod = require('../middleware/findPeriod');  <-- Work in progress
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
 const getDayOf = require('../middleware/getDayOf');
+const axios = require('axios');
 
 
 
@@ -21,11 +22,24 @@ router.get('/', isLoggedIn, (req, res) => {
 })
 
 router.get('/advice', isLoggedIn, (req, res) => {
-    res.render('user/advice')
+    const suggestions = [];
+    res.render('user/advice', { suggestions })
 })
 
 router.get('/advice/results', isLoggedIn, (req, res) => {
     // API CALL
+    axios.get(`http://mapi-us.iterar.co/api/${req.query.drug}/substances.json`).then(data => {
+        let activeIngredients = data.data
+            //data.data is an array
+        if (activeIngredients.length === 0) {
+            axios.get(`http://mapi-us.iterar.co/api/autocomplete?query=${req.query.drug.slice(0,3)}`).then(data => {
+                let suggestions = data.data.suggestions;
+                res.render('user/advice', { suggestions })
+            })
+        } else {
+            res.render('user/adviceResults', { activeIngredients, drug: req.query.drug })
+        }
+    })
 })
 
 router.get('/:month', isLoggedIn, (req, res) => {

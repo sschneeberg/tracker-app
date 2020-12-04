@@ -25,7 +25,7 @@ main.userhome,
 main.showDay,
 main.new,
 main.edit,
-main#advice {
+main.advice {
     align-items: flex-start;
     justify-content: flex-start;
     padding-left: 350px;
@@ -46,7 +46,7 @@ main#signup form {
 
 main#login form input.btn,
 main#signup form input.btn,
-main#advice form input.btn {
+main.advice form input.btn {
     float: right;
 }
 
@@ -166,13 +166,13 @@ section {
     width: 100%;
 }
 
-main#advice section#symptom-search {
+main.advice section#symptom-search {
     border-radius: 12px;
     margin-top: 10px;
     padding: 10px;
 }
 
-main#advice section#symptom-search:hover {
+main.advice section#symptom-search:hover {
     background-color: rgb(247, 215, 215);
 }
 
@@ -199,7 +199,8 @@ div.card-body {
     width: 100%;
 }
 
-div.day-body {
+div.day-body,
+section.data-search {
     position: relative;
     width: 100%;
     padding: 30px;
@@ -271,7 +272,7 @@ h4.collapsible-header {
     main#error,
     main.edit,
     main.new,
-    main#advice {
+    main.advice {
         padding-left: 50px;
     }
     div#dayNav {

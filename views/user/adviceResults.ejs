@@ -1,0 +1,24 @@
+<main class="advice">
+    <h3>Active Ingredients in
+        <%= drug.slice(0,1).toUpperCase() + drug.slice(1,drug.length) %>
+    </h3>
+    <ul>
+        <% for( let i = 0; i < activeIngredients.length; i++ ) { %>
+            <li>
+                <%= activeIngredients[i] %>
+            </li>
+            <% } %>
+    </ul>
+
+    <form action="/user/meds" method="POST">
+        <input type="hidden" name="name" value="<%= drug.slice(0,1).toUpperCase() + drug.slice(1,drug.length) %>">
+        <div class="input-field">
+            <input class="btn btn-secondary" type="submit" value="ADD MEDICATION">
+        </div>
+    </form>
+
+    <div class="arrows">
+        <a href="/user/advice"><i class="fas fa-chevron-left"></i>Back to Search</a>
+    </div>
+
+</main>
