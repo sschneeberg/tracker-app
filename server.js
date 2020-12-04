@@ -45,7 +45,14 @@ app.get('/', (req, res) => {
     res.render('index', { alerts: res.locals.alerts });
 });
 
+/*
+app.get('*', (req, res) => {
+    console.log(req._parsedOriginalUrl.pathname.includes('auth'))
+    if (!req._parsedOriginalUrl.pathname.includes('user') && !req._parsedOriginalUrl.pathname.includes('auth')) {
+        res.render('error')
+    }
 
+}) */
 
 app.use('/auth', require('./controllers/auth'));
 app.use('/user', require('./controllers/user'));

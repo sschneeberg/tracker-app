@@ -41,6 +41,9 @@
                 <div class="input-field">
                     <input type="hidden" name="date" value="<%= new Date(2020, (month.num-1), day.num) %>">
                 </div>
+                <div class="input-field">
+                    <input type="hidden" name="periodId" value="<%= period.id %>">
+                </div>
                 <input class='btn btn-secondary' id='send' type='submit'>
             </form>
         </li>

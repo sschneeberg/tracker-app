@@ -244,16 +244,14 @@ router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
         type: type,
         severity: severity
     }).then(symptom => {
-        //HERE
-        //HERE
-        //HERE
         //find correct period and add to period
         db.period.findOne({
             where: {
                 userId: user.id,
-                //date criteria
+                id: req.body.periodId
             }
-        }).then(() => {
+        }).then((period) => {
+            period.addSymptom(symptom);
             res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
