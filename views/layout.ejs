@@ -17,20 +17,24 @@
 
         <nav>
             <div class="nav-wrapper">
-                <a href='/' class="brand-logo">Tracker App</a>
-                <ul id="nav-mobile" class="right">
-                    <% if (!currentUser) { %>
-                        <li><a class="modal-trigger" href="#signup">Signup</a> </li>
-                        <li><a class="modal-trigger" href="#login">Login</a></li>
-                        <% } else { %>
-                            <li>
-                                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
-                            </li>
-                            <li>
-                                <a href="/auth/logout">Logout</a>
-                            </li>
-                            <% } %>
-                </ul>
+                <% if(!currentUser) { %>
+                    <a href='/' class="brand-logo">Tracker App</a>
+                    <% } else { %>
+                        <a href='/user/<%= (new Date().getMonth() + 1) %>' class="brand-logo">Tracker App</a>
+                        <% } %>
+                            <ul id="nav-mobile" class="right">
+                                <% if (!currentUser) { %>
+                                    <li><a class="modal-trigger" href="#signup">Signup</a> </li>
+                                    <li><a class="modal-trigger" href="#login">Login</a></li>
+                                    <% } else { %>
+                                        <li>
+                                            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="/auth/logout">Logout</a>
+                                        </li>
+                                        <% } %>
+                            </ul>
             </div>
         </nav>
     </header>

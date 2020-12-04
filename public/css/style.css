@@ -9,6 +9,7 @@ footer {
 
 main {
     background-color: whitesmoke;
+    flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,11 +17,14 @@ main {
     width: 100vw;
 }
 
+main#error {
+    padding-left: 350px;
+}
+
 main.userhome,
 main.showDay,
 main.new,
 main.edit {
-    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     padding-left: 350px;
@@ -237,7 +241,10 @@ h4.collapsible-header {
         top: 0;
     }
     main.userhome,
-    main.showDay {
+    main.showDay,
+    main#error,
+    main.edit,
+    main.new {
         padding-left: 50px;
     }
     div#dayNav {

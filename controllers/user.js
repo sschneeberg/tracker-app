@@ -24,6 +24,9 @@ router.get('/:month', isLoggedIn, (req, res) => {
     //find user's data:
     //all info for this month
     //upcoming date or current day of period
+    if (!req.params.month.match(/^[0-9]+$/)) {
+        res.render('error');
+    }
     const month = {
         name: getMonth(req.params.month),
         num: req.params.month
@@ -71,6 +74,9 @@ router.get('/:month', isLoggedIn, (req, res) => {
 });
 
 router.get('/:month/:day', isLoggedIn, (req, res) => {
+    if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
+        res.render('error');
+    }
     //find user's data for the day
     //add ability to add note on view
     const month = {
@@ -141,6 +147,9 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
 
 //create new note
 router.get('/:month/:day/new', isLoggedIn, (req, res) => {
+    if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
+        res.render('error');
+    }
     const month = {
         name: getMonth(req.params.month),
         num: req.params.month
@@ -169,6 +178,9 @@ router.get('/:month/:day/new', isLoggedIn, (req, res) => {
 
 //edit note
 router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
+    if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
+        res.redirect('*');
+    }
     const month = {
         name: getMonth(req.params.month),
         num: req.params.month
@@ -268,6 +280,12 @@ router.delete('/:month/:day/:id/note', isLoggedIn, (req, res) => {
     }).catch(err => console.log(err))
 })
 
+
+//errors
+router.get('*', (req, res) => {
+    res.render('error')
+
+})
 
 
 

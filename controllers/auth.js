@@ -53,4 +53,12 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
+//errors
+router.get('*', (req, res) => {
+    console.log(res.locals.alerts)
+    if (!res.locals.alerts.errors) {
+        res.render('error')
+    }
+})
+
 module.exports = router;

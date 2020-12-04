@@ -46,6 +46,7 @@ app.get('/', (req, res) => {
 });
 
 
+
 app.use('/auth', require('./controllers/auth'));
 app.use('/user', require('./controllers/user'));
 
