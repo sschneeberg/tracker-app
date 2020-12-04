@@ -8,12 +8,14 @@ const getMonthNav = require('../middleware/getMonthNav');
 const getDayNav = require('../middleware/getDayNav');
 const getRanges = require('../middleware/getRanges');
 const getPeriodDay = require('../middleware/getPeriodDay');
+const getResults = require('../middleware/getResults');
+const getDayOf = require('../middleware/getDayOf');
 //const findPeriod = require('../middleware/findPeriod');  <-- Work in progress
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
-const getDayOf = require('../middleware/getDayOf');
 const axios = require('axios');
+
 
 
 
@@ -45,13 +47,16 @@ router.get('/advice/results', isLoggedIn, (req, res) => {
 
 //user data summary
 router.get('/summary', isLoggedIn, (req, res) => {
-    res.render('user/summary')
+    res.render('user/summary', { results: [] })
 })
 
 //data results
 router.get('/summary/symptoms', isLoggedIn, (req, res) => {
-
-
+    const type = req.query.type.toLowerCase();
+    getResults(type).then(results => {
+        console.log(results[0][0].severity)
+        res.render('user/summary', { results: results[0] })
+    })
 })
 
 //data results
@@ -59,7 +64,7 @@ router.get('/summary/date', isLoggedIn, (req, res) => {
     //date value in form "MMM DD, YYYY"
     let date = req.query.date.split(',').join('');
     date = moment(date, 'MMM DD YYYY').format('MM D YYYY');
-    let [month, day, year] = date.split(' ');
+    const [month, day, year] = date.split(' ');
     res.redirect(`/user/${month}/${day}`)
 
 

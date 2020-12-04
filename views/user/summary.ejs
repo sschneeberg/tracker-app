@@ -15,6 +15,33 @@
                 <input class="btn btn-secondary" type="submit" value="SEARCH">
             </div>
         </form>
+        <% if (results.length > 0) { %>
+            <h5>Results for
+                <%= results[0].type.slice(0,1).toUpperCase() + results[0].type.slice(1,results[0].length) %>
+            </h5>
+            <ul>
+                <% for( let i = 0; i < results.length; i++ ) { %>
+                    <li class="list" id="symptom-list">
+                        <div class="date">
+                            <i class="fas fa-angle-double-up fa-sm"></i>
+                            <%= [results[i].date.getMonth()+1, results[i].date.getDate(), results[i].date.getFullYear()].join('/')%>
+                                :
+                        </div>
+                        <div class="symptom-severity">
+                            <% for( let j = 1; j <= results[i].severity; j++ ) { %>
+                                <i class="fas fa-square" id="filled"></i>
+                                <% } %>
+                                    <% if (results[i].severity < 5) { %>
+                                        <% for( let n = results[i].severity; n < 5; n++ ) { %>
+                                            <i class="fas fa-square" id="empty"></i>
+                                            <% } %>
+                                                <% } %>
+                        </div>
+                    </li>
+                    <% } %>
+            </ul>
+            <% } %>
+
     </section>
     <section class="data-search">
         <h5>Date Search</h5>

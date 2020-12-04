@@ -176,7 +176,8 @@ main.advice section#symptom-search:hover {
     background-color: rgb(247, 215, 215);
 }
 
-div#symptom {
+div#symptom,
+li#symptom-list {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -263,8 +264,8 @@ h4.collapsible-header {
     background-color: whitesmoke;
 }
 
-li.ingredient,
-li.ingredient i {
+li.list,
+li.list i {
     padding: 5px;
 }
 
