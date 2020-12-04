@@ -83,13 +83,11 @@
                                                     <input type="hidden" name="id" value="<%= note.id %>">
                                                 </div>
                                             </div>
-                                            <div class="modal-footer ">
-                                                <button type="submit " class="btn btn-secondary ">ENTER</button>
+                                            <div class="modal-footer editNote">
+                                                <button type="submit " class="btn btn-secondary submit">SAVE</button>
                                         </form>
-                                        <form id="delete-button " action="/user/<%=month.num%>/
-                                            <%=day.num%>/
-                                                <%= note.id %>/note?_method=DELETE" method="POST">
-                                            <input class='btn btn-secondary' type='submit' value="DELETE">
+                                        <form id="delete-button " action="/user/<%=month.num%>/<%=day.num%>/<%= note.id %>/note?_method=DELETE" method="POST">
+                                                <button type="submit " class="btn btn-secondary submit">DELETE NOTE</button>
                                         </form>
                                         </div>
                                     </div>

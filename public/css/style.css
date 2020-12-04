@@ -81,6 +81,16 @@ a.sidenav-trigger i {
     padding: 20px;
 }
 
+div.editNote {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%
+}
+
+div.editNote button.btn.btn-secondary.submit {
+    margin: 10px;
+}
+
 span.modal-close {
     float: right;
 }
