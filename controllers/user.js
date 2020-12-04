@@ -345,13 +345,14 @@ router.post('/meds', isLoggedIn, (req, res) => {
 
 //update note
 router.put('/:month/:day/:id/note', isLoggedIn, (req, res) => {
+    console.log('HERE')
     db.note.update({
         title: req.body.title,
-        content: req.body.conent,
+        content: req.body.content,
     }, {
-        where: req.params.id
+        where: { id: req.body.id }
     }).then(() => {
-        res.redirect(`/user/${req.params.month}/${req.params.day}/new`)
+        res.redirect(`/user/${req.params.month}/${req.params.day}`)
     }).catch(err => console.log(err))
 })
 
