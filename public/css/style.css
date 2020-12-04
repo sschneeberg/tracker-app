@@ -263,6 +263,15 @@ h4.collapsible-header {
     background-color: whitesmoke;
 }
 
+li.ingredient,
+li.ingredient i {
+    padding: 5px;
+}
+
+.datepicker-controls .select-month input {
+    width: 85px;
+}
+
 @media (max-width: 985px) {
     .sidenav {
         height: 100vh;

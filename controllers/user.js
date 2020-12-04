@@ -26,6 +26,7 @@ router.get('/advice', isLoggedIn, (req, res) => {
     res.render('user/advice', { suggestions })
 })
 
+//api results
 router.get('/advice/results', isLoggedIn, (req, res) => {
     // API CALL
     axios.get(`http://mapi-us.iterar.co/api/${req.query.drug}/substances.json`).then(data => {
@@ -42,8 +43,26 @@ router.get('/advice/results', isLoggedIn, (req, res) => {
     }).catch(err => console.log(err))
 })
 
+//user data summary
 router.get('/summary', isLoggedIn, (req, res) => {
     res.render('user/summary')
+})
+
+//data results
+router.get('/summary/symptoms', isLoggedIn, (req, res) => {
+
+
+})
+
+//data results
+router.get('/summary/date', isLoggedIn, (req, res) => {
+    //date value in form "MMM DD, YYYY"
+    let date = req.query.date.split(',').join('');
+    date = moment(date, 'MMM DD YYYY').format('MM D YYYY');
+    let [month, day, year] = date.split(' ');
+    res.redirect(`/user/${month}/${day}`)
+
+
 })
 
 router.get('/:month', isLoggedIn, (req, res) => {
@@ -267,7 +286,7 @@ router.post('/:month/:day/symptom', isLoggedIn, (req, res) => {
     const user = res.locals.currentUser;
     db.symptom.create({
         date: date,
-        type: type,
+        type: type.toLowerCase(),
         severity: severity
     }).then(symptom => {
         //find correct period and add to period

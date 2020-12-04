@@ -76,3 +76,5 @@ db.user.findOne().then(user => {
 //console.log(getMonth('November'))
 
 //console.log(moment().format('MM') == 12)
+
+//console.log(moment('Dec 14 2020', 'MMM DD YYYY').toDate())
