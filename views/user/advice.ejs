@@ -18,7 +18,8 @@
             <p>Did you mean:</p>
             <ul>
                 <% for( let i = 0; i < Math.min(suggestions.length,4); i++ ) { %>
-                    <li>
+                    <li class='list'>
+                        <i class="fas fa-search fa-sm"></i>
                         <%= suggestions[i] %>
                     </li>
                     <% } %>

@@ -37,6 +37,7 @@ router.get('/advice/results', isLoggedIn, (req, res) => {
         if (activeIngredients.length === 0) {
             axios.get(`http://mapi-us.iterar.co/api/autocomplete?query=${req.query.drug.slice(0,3)}`).then(data => {
                 let suggestions = data.data.suggestions;
+                if (suggestions.length === 0) { suggestions[0] = 'No matches found' }
                 res.render('user/advice', { suggestions })
             }).catch(err => console.log(err))
         } else {
