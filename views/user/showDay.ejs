@@ -28,11 +28,11 @@
                                                 <%= symptom.type.slice(0,1).toUpperCase() + symptom.type.slice(1,symptom.type.length) %>
                                             </h5>
                                             <div class="symptom-severity">
-                                                <% for( let i = 1; i <= symptom.severity; i++ ) { %>
+                                                <% for( let i = 1; i < symptom.severity; i++ ) { %>
                                                     <i class="fas fa-square" id="filled"></i>
                                                     <% } %>
                                                         <% if (symptom.severity < 5) { %>
-                                                            <% for( let i = symptom.severity; i < 5; i++ ) { %>
+                                                            <% for( let i = symptom.severity; i <= 5; i++ ) { %>
                                                                 <i class="fas fa-square" id="empty"></i>
                                                                 <% } %>
                                                                     <% } %>
