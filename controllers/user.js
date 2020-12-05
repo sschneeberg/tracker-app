@@ -269,6 +269,18 @@ router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
 
 //add period start/end
 router.post('/:month/:day/period', isLoggedIn, (req, res) => {
+    let user = res.locals.currentUser;
+    if (req.body.end === "on") {
+        //find recent period and add end date
+        //update user avg cycle and avg period length, update user
+        let periodId = req.body.periodId;
+        let date = req.body.date;
+
+
+    } else if (req.body.start === "on") {
+        //create a new period
+    }
+    console.log(req.body)
     res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
 

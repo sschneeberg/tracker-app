@@ -187,13 +187,22 @@ main.advice section#symptom-search:hover {
 }
 
 div#symptom,
-li#symptom-list {
+li#symptom-list,
+div.check {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 75px 0 25px;
     height: 4.5rem;
+}
+
+div.check {
+    justify-content: flex-start;
+}
+
+div.switch {
+    margin-left: 50px;
 }
 
 div.card {
