@@ -98,7 +98,6 @@ router.get('/:month', isLoggedIn, (req, res) => {
     };
     [month.previousMonth, month.nextMonth] = getMonthNav(month.num);
     let user = res.locals.currentUser;
-    console.log('ID', user.id)
     db.period.findAll({
         where: {
             [Op.and]: [
@@ -114,11 +113,10 @@ router.get('/:month', isLoggedIn, (req, res) => {
         },
         include: [db.symptom]
     }).then(periods => {
-        console.log('PERIODS', periods)
         let periodWeeks = periods.map(period => period.getDays());
         const today = new Date();
         let dayOf = getDayOf(today, periodWeeks, true);
-        let predictedStart = predictStart(periods, user);
+        let predictedStart = predictStart(today, periods, user);
         let symptoms = periods.map(function(period) {
             return period.symptoms
         });
