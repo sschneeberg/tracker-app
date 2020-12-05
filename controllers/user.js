@@ -98,17 +98,23 @@ router.get('/:month', isLoggedIn, (req, res) => {
     };
     [month.previousMonth, month.nextMonth] = getMonthNav(month.num);
     let user = res.locals.currentUser;
+    console.log('ID', user.id)
     db.period.findAll({
         where: {
-            //matches user and starts or ends in this month
-            userId: user.id,
-            [Op.or]: [
-                sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('startDate')), month.num),
-                sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('endDate')), month.num)
+            [Op.and]: [
+                //matches user and starts or ends in this month
+                { userId: user.id },
+                {
+                    [Op.or]: [
+                        sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('startDate')), month.num),
+                        sequelize.where(sequelize.fn("date_part", 'month', sequelize.col('endDate')), month.num)
+                    ]
+                }
             ]
         },
         include: [db.symptom]
     }).then(periods => {
+        console.log('PERIODS', periods)
         let periodWeeks = periods.map(period => period.getDays());
         const today = new Date();
         let dayOf = getDayOf(today, periodWeeks, true);
@@ -159,9 +165,9 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
     //try to change this to a function to be DRY
     db.period.findOne({
         where: sequelize.literal(`(
-                            CAST(CAST("startDate" AS Date) AS Text) IN (${startRange})
+                            (CAST(CAST("startDate" AS Date) AS Text) IN (${startRange})
                             OR
-                            CAST(CAST("endDate" AS Date) AS Text) IN (${endRange})
+                            CAST(CAST("endDate" AS Date) AS Text) IN (${endRange}))
                             AND
                             "userId" = ${user.id}
                     )`),
