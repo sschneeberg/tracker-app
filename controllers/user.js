@@ -67,7 +67,7 @@ router.get('/summary/symptoms', isLoggedIn, (req, res) => {
         include: [db.med]
     }).then(user => {
         meds = user.meds;
-        getResults(type).then(results => {
+        getResults(user.id, type).then(results => {
             res.render('user/summary', { results: results[0], meds })
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
@@ -236,9 +236,9 @@ router.get('/:month/:day/new', isLoggedIn, (req, res) => {
     //try to change this to a function to be DRY
     db.period.findOne({
         where: sequelize.literal(`(
-                            CAST(CAST("startDate" AS Date) AS Text) IN (${startRange})
+                            (CAST(CAST("startDate" AS Date) AS Text) IN (${startRange})
                             OR
-                            CAST(CAST("endDate" AS Date) AS Text) IN (${endRange})
+                            CAST(CAST("endDate" AS Date) AS Text) IN (${endRange}))
                             AND
                             "userId" = ${user.id}
                     )`),
