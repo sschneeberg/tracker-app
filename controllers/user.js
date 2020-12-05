@@ -272,16 +272,32 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
     let user = res.locals.currentUser;
     if (req.body.end === "on") {
         //find recent period and add end date
+        //update period length + cycle length
         //update user avg cycle and avg period length, update user
         let periodId = req.body.periodId;
         let date = req.body.date;
-
-
+        db.period.findOne({
+            where: {
+                userId: user.id,
+                endDate: {
+                    [Op.is]: null
+                }
+            }
+        }).then(period => {
+            console.log(period);
+            res.redirect(`/user/${req.params.month}/${req.params.day}`)
+        })
     } else if (req.body.start === "on") {
-        //create a new period
+        let date = req.body.date;
+        //create a new period for user with start date
+        db.period.create({
+            userId: user.id,
+            startDate: date
+        }).then(period => {
+            console.log(period)
+            res.redirect(`/user/${req.params.month}/${req.params.day}`)
+        })
     }
-    console.log(req.body)
-    res.redirect(`/user/${req.params.month}/${req.params.day}`)
 })
 
 //add note to db

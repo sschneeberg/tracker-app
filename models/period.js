@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
                 } else {
                     //if period has started but not ended count up to today
                     let day = this.startDate;
-                    while (moment(day).format('M D YYYY') !== moment().format('M D YYYY')) {
+                    while (moment(day).format('M D YYYY') <= moment().format('M D YYYY')) {
                         days.push(day);
                         day = moment(day).add(1, 'd').toDate();
                     }
