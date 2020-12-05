@@ -44,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
 
+        getLength() {
+            return (Math.floor((Date.parse(this.endDate) - Date.parse(this.startDate)) / 86400000) + 1);
+        }
+
     };
     period.init({
         userId: DataTypes.INTEGER,

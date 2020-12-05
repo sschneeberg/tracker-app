@@ -16,6 +16,8 @@ const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
 const axios = require('axios');
+const period = require('../models/period');
+const getCycleLength = require('../middleware/getCycleLength');
 
 router.get('/', isLoggedIn, (req, res) => {
     res.redirect(`/user/${moment().format('MM')}`)
@@ -276,17 +278,42 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
         //update user avg cycle and avg period length, update user
         let periodId = req.body.periodId;
         let date = req.body.date;
-        db.period.findOne({
+        //find the last period
+        db.period.max('id', {
             where: {
                 userId: user.id,
                 endDate: {
-                    [Op.is]: null
+                    [Op.not]: null
                 }
             }
-        }).then(period => {
-            console.log(period);
-            res.redirect(`/user/${req.params.month}/${req.params.day}`)
-        })
+        }).then(id => {
+            db.period.findOne({
+                where: {
+                    id: id,
+                }
+            }).then(periodOld => {
+                //use old data to find cycle and period duration
+                let cycleLength = getCycleLength(date, periodOld.endDate);
+                //find and update current one
+                db.period.update({
+                    endDate: date,
+                    cycleLength: cycleLength,
+                }, {
+                    where: { id: periodId }
+                }).then(() => {
+                    db.period.findOne({
+                        where: { id: periodId }
+                    }).then(period => {
+                        periodLength = period.getLength();
+                        db.period.update({
+                            periodLength: periodLength
+                        }, { where: { id: periodId } }).then(() => {
+                            res.redirect(`/user/${req.params.month}/${req.params.day}`);
+                        }).catch(err => console.log(err))
+                    }).catch(err => console.log(err))
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
     } else if (req.body.start === "on") {
         let date = req.body.date;
         //create a new period for user with start date
@@ -296,7 +323,7 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
         }).then(period => {
             console.log(period)
             res.redirect(`/user/${req.params.month}/${req.params.day}`)
-        })
+        }).catch(err => console.log(err))
     }
 })
 
