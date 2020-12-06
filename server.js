@@ -37,25 +37,22 @@ app.use((req, res, next) => {
     next();
 })
 
-//middleware
-const isLoggedIn = require('./middleware/isLoggedIn')
 
 app.get('/', (req, res) => {
     console.log(res.locals.alerts)
     res.render('index', { alerts: res.locals.alerts });
 });
 
-/*
-app.get('*', (req, res) => {
-    console.log(req._parsedOriginalUrl.pathname.includes('auth'))
-    if (!req._parsedOriginalUrl.pathname.includes('user') && !req._parsedOriginalUrl.pathname.includes('auth')) {
-        res.render('error')
-    }
-
-}) */
-
 app.use('/auth', require('./controllers/auth'));
 app.use('/user', require('./controllers/user'));
+
+
+app.get('*', (req, res) => {
+    res.render('error')
+
+})
+
+
 
 
 const port = process.env.PORT || 3000;

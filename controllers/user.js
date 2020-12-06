@@ -93,7 +93,7 @@ router.get('/:month', isLoggedIn, (req, res) => {
     //find user's data:
     //all info for this month
     //upcoming date or current day of period
-    if (!req.params.month.match(/^[0-9]+$/)) {
+    if ((!req.params.month.match(/^[0-9]+$/) || req.params.month > 12 || req.params.month < 1)) {
         res.render('error');
     }
     const month = {
@@ -148,7 +148,7 @@ router.get('/:month', isLoggedIn, (req, res) => {
 });
 
 router.get('/:month/:day', isLoggedIn, (req, res) => {
-    if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
+    if ((!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) || (req.params.month > 12 || req.params.month < 1) || (req.params.day > 31 || req.params.month < 1)) {
         res.render('error');
     }
     //find user's data for the day
