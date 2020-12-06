@@ -18,6 +18,7 @@ const moment = require('moment');
 const axios = require('axios');
 const period = require('../models/period');
 const getCycleLength = require('../middleware/getCycleLength');
+const updateAvgs = require('../middleware/updateAvgs');
 
 router.get('/', isLoggedIn, (req, res) => {
     res.redirect(`/user/${moment().format('MM')}`)
@@ -305,9 +306,11 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
                         where: { id: periodId }
                     }).then(period => {
                         periodLength = period.getLength();
+                        updateAvgs(user, cycleLength, periodLength);
                         db.period.update({
                             periodLength: periodLength
                         }, { where: { id: periodId } }).then(() => {
+                            //update user avgs, call fcn, don't await b/c don't need data immediately
                             res.redirect(`/user/${req.params.month}/${req.params.day}`);
                         }).catch(err => console.log(err))
                     }).catch(err => console.log(err))
@@ -321,7 +324,6 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
             userId: user.id,
             startDate: date
         }).then(period => {
-            console.log(period)
             res.redirect(`/user/${req.params.month}/${req.params.day}`)
         }).catch(err => console.log(err))
     }
@@ -401,7 +403,6 @@ router.post('/meds', isLoggedIn, (req, res) => {
 
 //update note
 router.put('/:month/:day/:id/note', isLoggedIn, (req, res) => {
-    console.log('HERE')
     db.note.update({
         title: req.body.title,
         content: req.body.content,

@@ -22,7 +22,6 @@ router.post('/signup', (req, res) => {
     }).then(([user, created]) => {
         if (created) {
             //redirect to home
-            console.log(user.name, ' created')
             passport.authenticate('local', {
                 successRedirect: `/user/${moment().format('MM')}`,
                 successFlash: 'Account created'
@@ -33,7 +32,7 @@ router.post('/signup', (req, res) => {
             res.redirect('/auth/signup');
         }
     }).catch(err => {
-        console.log('Error', err);
+        console.log(err);
         req.flash('error', 'Please try again. Password must be at least 8 characters and usernames must be unique');
         res.redirect('/auth/signup');
     })
