@@ -19,6 +19,7 @@ const axios = require('axios');
 const period = require('../models/period');
 const getCycleLength = require('../middleware/getCycleLength');
 const updateAvgs = require('../middleware/updateAvgs');
+const updateCycle = require('../middleware/updateCycle');
 
 router.get('/', isLoggedIn, (req, res) => {
     res.redirect(`/user/${moment().format('MM')}`)
@@ -55,7 +56,7 @@ router.get('/summary', isLoggedIn, (req, res) => {
         include: [db.med]
     }).then(user => {
         const meds = user.meds;
-        res.render('user/summary', { results: [], meds })
+        res.render('user/summary', { results: [], meds, user })
     }).catch(err => console.log(err))
 
 })
@@ -71,7 +72,7 @@ router.get('/summary/symptoms', isLoggedIn, (req, res) => {
     }).then(user => {
         meds = user.meds;
         getResults(user.id, type).then(results => {
-            res.render('user/summary', { results: results[0], meds })
+            res.render('user/summary', { results: results[0], meds, user })
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 
@@ -287,35 +288,23 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
                     [Op.not]: null
                 }
             }
-        }).then(id => {
-            db.period.findOne({
-                where: {
-                    id: id,
-                }
-            }).then(periodOld => {
-                //use old data to find cycle and period duration
-                let cycleLength = getCycleLength(date, periodOld.endDate);
-                //find and update current one
-                db.period.update({
-                    endDate: date,
-                    cycleLength: cycleLength,
-                }, {
-                    where: { id: periodId }
-                }).then(() => {
-                    db.period.findOne({
-                        where: { id: periodId }
-                    }).then(period => {
-                        periodLength = period.getLength();
-                        updateAvgs(user, cycleLength, periodLength);
-                        db.period.update({
-                            periodLength: periodLength
-                        }, { where: { id: periodId } }).then(() => {
-                            //update user avgs, call fcn, don't await b/c don't need data immediately
-                            res.redirect(`/user/${req.params.month}/${req.params.day}`);
-                        }).catch(err => console.log(err))
-                    }).catch(err => console.log(err))
+        }).then(idOld => {
+            let cycleLength = user.avgCycle;
+            //if there is old period, find and calculate cycleLength
+            if (idOld) {
+                db.period.findOne({
+                    where: { id: idOld }
+                }).then(periodOld => {
+                    //use old data to find cycle and period duration
+                    cycleLength = getCycleLength(date, periodOld.endDate);
+                    updateCycle(cycleLength, date, user, periodId);
+                    //find and update current one
                 }).catch(err => console.log(err))
-            }).catch(err => console.log(err))
+            } else {
+                updateCycle(cycleLength, date, user, periodId);
+            }
+
+            res.redirect(`/user/${req.params.month}/${req.params.day}`);
         }).catch(err => console.log(err))
     } else if (req.body.start === "on") {
         let date = req.body.date;
@@ -323,7 +312,7 @@ router.post('/:month/:day/period', isLoggedIn, (req, res) => {
         db.period.create({
             userId: user.id,
             startDate: date
-        }).then(period => {
+        }).then(() => {
             res.redirect(`/user/${req.params.month}/${req.params.day}`)
         }).catch(err => console.log(err))
     }

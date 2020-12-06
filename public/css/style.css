@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans&display=swap');
 body {
     background-color: whitesmoke;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.btn.btn-secondary {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Amatic SC', cursive;
 }
 
 main,
@@ -53,11 +68,17 @@ main.advice form input.btn {
 nav {
     background-color: rgba(154, 230, 211, 0.76);
     padding: 5px 5px 5px 20px;
+    font-family: 'Amatic SC', cursive;
 }
 
-nav li a,
 nav a.brand-logo {
-    color: rgb(84, 96, 109)
+    color: rgb(84, 96, 109);
+    font-size: 2.5em;
+}
+
+nav li a {
+    color: rgb(84, 96, 109);
+    font-size: 1.75em;
 }
 
 a.sidenav-trigger {
@@ -73,8 +94,18 @@ a.sidenav-trigger i {
     top: 65px;
 }
 
+.sidenav li.nav {
+    width: 100%;
+}
+
+.sidenav li.nav:hover,
+.sidenav li.nav:hover a {
+    background-color: rgba(211, 211, 211, 0.356);
+    color: turquoise;
+}
+
 #userinfo {
-    padding: 15px 0px 0px 20px;
+    padding: 15px 0px 30px 20px;
 }
 
 .modal {
@@ -137,6 +168,10 @@ div#dayNav {
     justify-content: space-between;
 }
 
+div.arrows {
+    margin: 30px 0 15px 0;
+}
+
 div.arrows i,
 div.arrows a {
     padding: 10px;
@@ -171,6 +206,11 @@ div.arrows a:hover i {
     border-radius: 12px;
 }
 
+h4.collapsible-header:hover,
+h4.collapsible-header:hover a {
+    color: turquoise;
+}
+
 div.row,
 section {
     width: 100%;
@@ -188,13 +228,18 @@ main.advice section#symptom-search:hover {
 
 div#symptom,
 li#symptom-list,
-div.check {
+div.check,
+div.month-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 75px 0 25px;
     height: 4.5rem;
+}
+
+div.month-header {
+    margin-top: 50px;
 }
 
 div.check {

@@ -11,7 +11,7 @@
             <form id='period-trigger' class="collapsible-body" action="/user/<%=month.num%>/<%=day.num%>/period" method="POST">
                 <% if (period && !period.endDate) { %>
                     <div class="input-field check">
-                        <h6>Period ended today: </h6>
+                        <p>Period ended today: </p>
                         <div class="switch">
                             <label>
                                 <input id="end" name="end" type="checkbox">
@@ -22,9 +22,9 @@
                     <div class="input-field">
                         <input type="hidden" name="periodId" value="<%= period.id %>">
                     </div>
-                    <% } else if (!period) { %>
+                    <% } else if (!period ) { %>
                         <div class="input-field check">
-                            <h6>Period started today: </h6>
+                            <p>Period started today: </p>
                             <div class="switch">
                                 <label>
                                         <input id="start" name="start" type="checkbox">
@@ -34,7 +34,7 @@
                         </div>
                         <% } else { %>
                             <div class="input-field check">
-                                <h6 style="color:lightgrey">Period ended today: </h6>
+                                <p style="color:lightgrey">Period ended today: </p>
                                 <div class="switch">
                                     <label>
                                         <input disabled id="end" name="end" type="checkbox">

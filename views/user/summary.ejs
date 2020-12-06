@@ -1,6 +1,14 @@
 <main class='advice'>
     <h3>Summary</h3>
     <section class="data-search">
+        <h5>Cycle Data</h5>
+        <p><i class="far fa-clock fa-sm"></i> Average cycle length:
+            <%= user.avgCycle %> Days</p>
+        <p><i class="far fa-clock fa-sm"></i> Average period length:
+            <%= user.avgPeriod %> Days</p>
+
+    </section>
+    <section class="data-search">
         <h5>My Medications <a class=" tooltipped" data-position="right" data-tooltip="To add a medication, search by name in Advice"><i class="fas fa-info-circle fa-xs"></i></a></span>
         </h5>
         <ul>
@@ -12,8 +20,6 @@
                 <% } %>
         </ul>
     </section>
-
-
     <section class="data-search">
         <h5>Symptom Search</h5>
         <form action="/user/summary/symptoms" method="GET">
