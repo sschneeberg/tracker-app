@@ -17,7 +17,7 @@ describe('Auth Controller', function() {
     });
 
     describe('POST /auth/signup', function() {
-        it('should redirect to / on success', function(done) {
+        it('should redirect to /user/:month on success', function(done) {
             request(app).post('/auth/signup')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
@@ -25,7 +25,7 @@ describe('Auth Controller', function() {
                     name: 'Mike Schull',
                     password: '123123123'
                 })
-                .expect('Location', '/')
+                .expect('Location', '/user/12')
                 .expect(302, done);
         });
 
@@ -50,14 +50,14 @@ describe('Auth Controller', function() {
     });
 
     describe('POST /auth/login', function() {
-        it('should redirect to / on success', function(done) {
+        it('should redirect to /user/:month on success', function(done) {
             request(app).post('/auth/login')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     username: 'test@test.co',
                     password: '123123123'
                 })
-                .expect('Location', '/')
+                .expect('Location', '/user/12')
                 .expect(302, done);
         });
 
