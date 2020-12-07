@@ -1,9 +1,14 @@
+//NOTE: THIS FILE OUT OF DATE DUE TO DB MODEL CHANGES
+
+
+/*
 const db = require('./models');
 const moment = require('moment');
 const sequelize = require('sequelize');
 const getMonth = require('./middleware/getMonth');
 const Op = sequelize.Op;
-/*
+
+
 //query periods from users including symptoms and notes
 db.user.findOne().then(user => {
     db.period.findAll({
@@ -71,15 +76,7 @@ db.user.findOne().then(user => {
     })
 })
 
-    */
-
-//console.log(getMonth('November'))
-
-//console.log(moment().format('MM') == 12)
-
-//console.log(moment('Dec 14 2020', 'MMM DD YYYY').toDate())
-
-/*
+//query users to get meds
 db.user.findOne({
     where: { id: 1 },
     include: [db.med]
@@ -87,4 +84,5 @@ db.user.findOne({
     const meds = user.meds;
     console.log(meds)
 }).catch(err => console.log(err))
+
 */

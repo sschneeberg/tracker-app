@@ -21,7 +21,7 @@ describe('Auth Controller', function() {
             request(app).post('/auth/signup')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
-                    username: 'test@butts.co',
+                    username: 'test@test.co',
                     name: 'Mike Schull',
                     password: '123123123'
                 })
@@ -54,7 +54,7 @@ describe('Auth Controller', function() {
             request(app).post('/auth/login')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
-                    username: 'test@butts.co',
+                    username: 'test@test.co',
                     password: '123123123'
                 })
                 .expect('Location', '/')
