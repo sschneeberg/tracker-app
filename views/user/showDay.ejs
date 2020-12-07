@@ -49,7 +49,7 @@
             <h4 class='notes'>Notes: </h4>
             <hr>
             <% if (notes.length > 0) { %>
-                <div class="row">
+                <div id="note-cards" class="row">
                     <% notes.forEach(note => { %>
                         <div class="col s12 m6 l4">
                             <div class="card">
@@ -64,21 +64,22 @@
                                 </div>
                             </div>
 
+                        </div>
 
-                            <div id="edit-note" class="modal">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="signupLabel">Edit Note:
-                                        <span class="modal-close">&times;</span> </h5>
-                                </div>
-                                <form action="/user/<%=month.num%>/<%=day.num%>/<%= note.id %>/note?_method=PUT" method="POST">
-                                    <div class=" modal-content ">
-                                        <div class="input-field ">
-                                            <label for="title">Title</label>
-                                            <input type="text" name="title" id="title" value="<%= note.title %> " required>
-                                        </div>
-                                        <div class="input-field ">
-                                            <label for="content">Content</label>
-                                            <textarea name="content" id="content" class="materialize-textarea"><%= note.content %> </textarea required>
+                        <div id="edit-note" class="modal">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="signupLabel">Edit Note:
+                                    <span class="modal-close">&times;</span> </h5>
+                            </div>
+                            <form action="/user/<%=month.num%>/<%=day.num%>/<%= note.id %>/note?_method=PUT" method="POST">
+                                <div class=" modal-content ">
+                                    <div class="input-field ">
+                                        <label for="title">Title</label>
+                                        <input type="text" name="title" id="title" value="<%= note.title %> " required>
+                                    </div>
+                                    <div class="input-field ">
+                                        <label for="content">Content</label>
+                                        <textarea name="content" id="content" class="materialize-textarea"><%= note.content %> </textarea required>
                                                 </div>
                                                 <div class="input-field ">
                                                     <input type="hidden" name="id" value="<%= note.id %>">
@@ -96,7 +97,7 @@
                                     <% }) %>
 
                                 </div>
-                                <% } %>
+                                <% } %>  
                 </section>
                 <section>
                     <h4 class='notes'>Sexual Activity: </h4>
