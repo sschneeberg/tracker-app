@@ -211,9 +211,7 @@ router.get('/:month/:day', isLoggedIn, (req, res) => {
                     ]
                 }
             }).then(activity => {
-                //pass data needed, find day of period if there is one
-                const periodInfo = getPeriodDay(period, day.day);
-                res.render('user/showDay', { month, day, notes, activity, symptoms, periodInfo, dayOf })
+                res.render('user/showDay', { month, day, notes, activity, symptoms, dayOf })
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))

@@ -92,6 +92,32 @@ Stretch Goal Schema
 | GET | /advice | user.js | Access medical advice through API |
 | GET | /advice/results | user.js | Show API search resutls |
 | GET | * | user.js, auth.js, server.js | Catch errors in path |
+|  |  |  | |
+| GET | /user/:month/:day/:id/edit | user.js | Edit note: No longer in use, replaced by modal|
+
+
+
+## Middleware
+
+| Function | Purpose | 
+| ------ | ---------------- |
+| isLoggedIn | Checks if there is a user logged in |
+| getMonth | Gets month name from number (1-12) |
+| getMonthLength | Gets length of month from number (1-12) |
+| fillMonth | Populates month object with all matching data |
+| getDayNav | Find next day and previous day |
+| getMonthNav | Find next month and previous month |
+| getCycleLength | Calculate length of just ended cycle |
+| getDayOf | Calculate current day of period |
+| predictStart | Predict start of next period |
+| getRanges | Find possible start and end dates to search for recorded period |
+| getResults | Get symptoms matching user search criteria |
+| updateAvgs | Updates user average period length |
+| UpdateCycle | Updates user average cycle length |
+| Not in use: |  |
+| findPeriod | In progress attempt at refactoring code |
+| getPeriodDay | Replaced by getDayOf |
+
 
 
 ## Styling and Responsiveness
