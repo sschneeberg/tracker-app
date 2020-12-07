@@ -8,7 +8,7 @@ describe('Grabbing month name from number', function() {
         if ((typeof monthName) === 'string') {
             done();
         } else {
-            done(monthName);
+            done(Error(monthName));
         }
     });
 
@@ -16,11 +16,13 @@ describe('Grabbing month name from number', function() {
         let months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
         let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         for (i = 0; i < months.length; i++) {
-            if (monthNames.indexOf(months[i]) === -1) {
-                done(months[i]);
+            if (monthNames[i] !== getMonth(months[i])) {
+                done(Error(months[i]));
+                break;
+            } else if (i === months.length - 1) {
+                done();
             }
         }
-
     });
 
 });
