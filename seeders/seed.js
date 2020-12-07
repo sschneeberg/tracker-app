@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 module.exports = {
     up: function(queryInterface, Sequelize) {
         return queryInterface.bulkInsert('users', [{
-            name: 'Simone Schneeberg',
-            username: 'sschneeberg',
+            name: 'Example User',
+            username: 'euser',
             password: bcrypt.hashSync('pass4word', 12),
             avgCycle: 30,
             avgPeriod: 7,
@@ -15,16 +15,16 @@ module.exports = {
         }], { returning: true }).then(function(user) {
             return queryInterface.bulkInsert('periods', [{
                 userId: user[0].id,
-                startDate: moment().subtract(7, 'd').toDate(),
-                endDate: moment().toDate(),
+                startDate: moment().subtract(1, 'month').subtract(7, 'd').toDate(),
+                endDate: moment().subtract(1, 'month').toDate(),
                 cycleLength: 28,
                 periodLength: 7,
                 createdAt: new Date(),
                 updatedAt: new Date()
             }, {
                 userId: user[0].id,
-                startDate: moment().subtract(1, 'month').subtract(7, 'd').toDate(),
-                endDate: moment().subtract(1, 'month').toDate(),
+                startDate: moment().subtract(7, 'd').toDate(),
+                endDate: moment().toDate(),
                 cycleLength: 28,
                 periodLength: 7,
                 createdAt: new Date(),

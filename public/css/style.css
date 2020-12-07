@@ -363,6 +363,13 @@ li.list {
         grid-template-columns: repeat( 3, 1fr);
         width: calc(100vw - 100px)
     }
+    div.month-header {
+        flex-direction: column;
+        justify-content: center;
+    }
+    div.month-header h2 {
+        margin-bottom: 0;
+    }
     nav a.brand-logo {
         visibility: hidden;
     }
