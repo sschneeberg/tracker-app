@@ -7,19 +7,17 @@ const fillMonth = require('../middleware/fillMonth');
 const getMonthNav = require('../middleware/getMonthNav');
 const getDayNav = require('../middleware/getDayNav');
 const getRanges = require('../middleware/getRanges');
-const getPeriodDay = require('../middleware/getPeriodDay');
 const getResults = require('../middleware/getResults');
 const getDayOf = require('../middleware/getDayOf');
 const predictStart = require('../middleware/predictStart');
+const getCycleLength = require('../middleware/getCycleLength');
+const updateCycle = require('../middleware/updateCycle');
 //const findPeriod = require('../middleware/findPeriod');  <-- Work in progress
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const moment = require('moment');
 const axios = require('axios');
-const period = require('../models/period');
-const getCycleLength = require('../middleware/getCycleLength');
-const updateAvgs = require('../middleware/updateAvgs');
-const updateCycle = require('../middleware/updateCycle');
+
 
 router.get('/', isLoggedIn, (req, res) => {
     res.redirect(`/user/${moment().format('MM')}`)
@@ -248,27 +246,6 @@ router.get('/:month/:day/new', isLoggedIn, (req, res) => {
     }).catch(err => console.log(err))
 })
 
-//edit note -- NOT IN USE ANY MORE
-/*
-router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
-    if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
-        res.redirect('*');
-    }
-    const month = {
-        name: getMonth(req.params.month),
-        num: req.params.month
-    };
-    const day = {
-        num: req.params.day,
-    };
-    db.note.findOne({
-        where: { id: req.params.id }
-    }).then((note) => {
-        res.render('user/editDay', { month, day, note })
-    }).catch(err => console.log(err))
-}) */
-
-
 //add period start/end
 router.post('/:month/:day/period', isLoggedIn, (req, res) => {
     let user = res.locals.currentUser;
@@ -417,5 +394,25 @@ router.get('*', (req, res) => {
 })
 
 
+
+//edit note -- NOT IN USE ANY MORE
+/*
+router.get('/:month/:day/:id/edit', isLoggedIn, (req, res) => {
+    if (!req.params.month.match(/^[0-9]+$/) || !req.params.day.match(/^[0-9]+$/)) {
+        res.redirect('*');
+    }
+    const month = {
+        name: getMonth(req.params.month),
+        num: req.params.month
+    };
+    const day = {
+        num: req.params.day,
+    };
+    db.note.findOne({
+        where: { id: req.params.id }
+    }).then((note) => {
+        res.render('user/editDay', { month, day, note })
+    }).catch(err => console.log(err))
+}) */
 
 module.exports = router
