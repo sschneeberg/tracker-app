@@ -173,7 +173,8 @@ div.arrows {
 }
 
 div.arrows i,
-div.arrows a {
+div.arrows a,
+main#landing a {
     padding: 10px;
     color: black;
 }
@@ -196,6 +197,7 @@ div.day button#selectDay:focus {
 div.day button#selectDay:hover,
 div.day:hover button#selectDay,
 div.day:hover i,
+main#landing a:hover,
 div.arrows a:hover,
 div.arrows a:hover i {
     color: turquoise;
